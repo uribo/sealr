@@ -1,2 +1,11 @@
-^seal\.Rproj$
+^.*\Rproj$
 ^\.Rproj\.user$
+^data-raw$
+^README\.Rmd$
+^Dockerfile$
+^docker-compose\.yml$
+^config\.yml$
+^\.Rprofile$
+^.*\.Rproj$
+^\.lintr$
+^LICENSE\.md$
