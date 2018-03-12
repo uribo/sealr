@@ -13,9 +13,11 @@ transcribe(x)
 Transcribe \R{} object assert conditions
 }
 \examples{
+\dontrun{
 x <- 1:3L; transcribe(x) \%>\% seal()
 transcribe(3.14) \%>\% seal()
 transcribe(letters) \%>\% seal()
 x <- iris$Species; transcribe(x) \%>\% seal()
 transcribe(iris) \%>\% seal()
+}
 }

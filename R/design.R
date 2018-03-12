@@ -37,7 +37,7 @@ design_expect_range <- function(x) {
 
 
 #' @rdname design
-#' @examples
+#' @example
 #' design_expect_dim(iris)
 design_expect_dim <- function(x) {
   object_name <- as.list(match.call())$x
@@ -96,7 +96,7 @@ design_expect_nlevels <- function(x) {
 }
 
 #' @rdname design
-#' @examples
+#' @example
 #' design_expect_nrow(mtcars)
 design_expect_nrow <- function(x) {
 
@@ -111,7 +111,7 @@ design_expect_nrow <- function(x) {
 }
 
 #' @rdname design
-#' @examples
+#' @example
 #' design_expect_ncol(mtcars)
 design_expect_ncol <- function(x) {
 
@@ -126,7 +126,7 @@ design_expect_ncol <- function(x) {
 }
 
 #' @rdname design
-#' @examples
+#' @example
 #' design_expect_names(iris) %>% seal()
 design_expect_names <- function(x) {
 
@@ -141,7 +141,7 @@ design_expect_names <- function(x) {
 }
 
 #' @rdname design
-#' @examples
+#' @example
 #' design_expect_varclass(iris)
 design_expect_varclass <- function(x) {
   object_name <- as.list(match.call())$x

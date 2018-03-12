@@ -43,10 +43,3 @@ design_expect_class(x)
 \description{
 Print an \R{} object test result
 }
-\examples{
-design_expect_dim(iris)
-design_expect_nrow(mtcars)
-design_expect_ncol(mtcars)
-design_expect_names(iris) \%>\% seal()
-design_expect_varclass(iris)
-}

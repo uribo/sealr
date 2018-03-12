@@ -1,16 +1,20 @@
 #' Transcribe \R{} object assert conditions
 #'
 #' @inheritParams design
+#' @export
 #' @examples
+#' \dontrun{
 #' x <- 1:3L; transcribe(x) %>% seal()
 #' transcribe(3.14) %>% seal()
 #' transcribe(letters) %>% seal()
 #' x <- iris$Species; transcribe(x) %>% seal()
 #' transcribe(iris) %>% seal()
+#' }
 transcribe <- function(x) {
   UseMethod("transcribe")
 }
 
+#' @export
 transcribe.numeric <- function(x) {
   object_name <- as.list(match.call())$x
 
@@ -44,6 +48,7 @@ transcribe.numeric <- function(x) {
 
 }
 
+#' @export
 transcribe.character <- function(x) {
   object_name <- as.list(match.call())$x
 
@@ -76,6 +81,7 @@ transcribe.character <- function(x) {
   )
 }
 
+#' @export
 transcribe.factor <- function(x) {
   object_name <- as.list(match.call())$x
 
@@ -108,7 +114,7 @@ transcribe.factor <- function(x) {
   )
 }
 
-
+#' @export
 transcribe.data.frame <- function(x) {
   object_name <- as.list(match.call())$x
 
