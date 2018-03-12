@@ -9,3 +9,4 @@
 ^.*\.Rproj$
 ^\.lintr$
 ^LICENSE\.md$
+^\.github$
