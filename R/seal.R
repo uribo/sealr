@@ -9,8 +9,7 @@
 #' @name seal
 #' @examples
 #' \dontrun{
-#' tests <- rlang::expr_interp(paste('test_that("aa", {
-#' expect_equal(', tests, ')})', sep = "\n"))
+#' tests <- transcribe(3.14)
 #' seal(tests, load_testthat = TRUE)
 #' seal(tests, load_testthat = FALSE)
 #' seal(tests, load_testthat = FALSE, clip = FALSE)

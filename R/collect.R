@@ -20,6 +20,9 @@
 NULL
 
 collect_objects <- function() {
+
+  . <- NULL
+
   target <- ls(name = .GlobalEnv)
 
   df <- tibble::data_frame(
