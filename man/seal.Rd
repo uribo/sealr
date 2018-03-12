@@ -12,7 +12,8 @@ seal(test, load_testthat = FALSE, clip = TRUE)
 
 \item{load_testthat}{include \code{library(testthat)} when \emph{TRUE}}
 
-\item{clip}{If \emph{TRUE} will overwrite the system clipboard.}
+\item{clip}{If \emph{TRUE} will overwrite the system clipboard.
+When clipr is not available, The clip arguments is forcibly \emph{FALSE}.}
 }
 \description{
 aaa

@@ -5,6 +5,7 @@
 #' @param test test
 #' @param load_testthat include `library(testthat)` when *TRUE*
 #' @param clip If *TRUE* will overwrite the system clipboard.
+#' When clipr is not available, The clip arguments is forcibly *FALSE*.
 #'
 #' @name seal
 #' @examples
@@ -34,7 +35,12 @@ seal <- function(test, load_testthat = FALSE, clip = TRUE) {
   )
 
   if (clip == TRUE)
-    res <- clipr::write_clip(res, "character", return_new = FALSE)
+    if (clipr::clipr_available() == FALSE) {
+      rlang::warn("clipr not available. check clipr configuration.")
+    } else {
+      res <- clipr::write_clip(res, "character", return_new = FALSE)
+    }
+
 
   return(res)
 }
