@@ -11,5 +11,8 @@ RUN install2.r \
   usethis \
   withr
 
-#RUN installGithub.r \
-#  'r-lib/usethis'
+RUN install2.r \
+  DT
+
+RUN installGithub.r \
+  'r-lib/devtools'

@@ -10,3 +10,6 @@
 ^\.lintr$
 ^LICENSE\.md$
 ^\.github$
+^\.travis\.yml$
+^codecov\.yml$
+^appveyor\.yml$
