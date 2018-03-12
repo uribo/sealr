@@ -5,6 +5,8 @@
 #' * filter_context
 #'
 #' @param context Types of \R{} object (`character`)
+#' @param ws which environment (work space) to search the available objects
+#' @param ... Further arguments
 #'
 #' @name collect
 #' @examples
@@ -19,11 +21,16 @@
 #' }
 NULL
 
-collect_objects <- function() {
+#' @rdname collect
+collect_objects <- function(ws = NULL, ...) {
 
   . <- NULL
 
-  target <- ls(name = .GlobalEnv)
+  if (is.null(ws)) {
+    target <- ls(name = .GlobalEnv)
+  } else {
+    target <- ls(name = ws)
+  }
 
   df <- tibble::data_frame(
     name = target,
@@ -41,8 +48,8 @@ collect_objects <- function() {
 
 #' @rdname collect
 #' @export
-filter_context <- function(context = "function") {
+filter_context <- function(context = "function", ...) {
 
-  collect_objects() %>%
+  collect_objects(...) %>%
     dplyr::filter(class == context)
 }

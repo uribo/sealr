@@ -2,12 +2,19 @@
 % Please edit documentation in R/collect.R
 \name{collect}
 \alias{collect}
+\alias{collect_objects}
 \alias{filter_context}
 \title{Collect \R{} object}
 \usage{
-filter_context(context = "function")
+collect_objects(ws = NULL, ...)
+
+filter_context(context = "function", ...)
 }
 \arguments{
+\item{ws}{which environment (work space) to search the available objects}
+
+\item{...}{Further arguments}
+
 \item{context}{Types of \R{} object (\code{character})}
 }
 \description{
