@@ -1,5 +1,12 @@
 context("test-object-context.R")
 
+test_that("collect object",{
+  expect_equal(
+    nrow(collect_objects(ws = NULL)),
+    0L
+  )
+})
+
 test_that("filter", {
 
   e <- new.env()
