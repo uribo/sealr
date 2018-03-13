@@ -8,13 +8,15 @@ NULL
 #' @example
 #' design_expect_length(letters)
 design_expect_length <- function(x) {
-  object_name <- as.list(match.call())$x
+
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_length(\n",
-    paste(object_name,
-          ",\n",
-          rlang::expr_text(length(x))),
+    paste(
+      object_name,
+      ",\n",
+      rlang::expr_text(length(x))),
     ")"
   )
 }
@@ -25,7 +27,7 @@ design_expect_length <- function(x) {
 #' design_expect_range(letters) %>% seal()
 design_expect_range <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0("expect_equal(\n",
          paste("range(",
@@ -35,12 +37,12 @@ design_expect_range <- function(x) {
          ')')
 }
 
-
 #' @rdname design
 #' @example
 #' design_expect_dim(iris)
 design_expect_dim <- function(x) {
-  object_name <- as.list(match.call())$x
+
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_equal(\n",
@@ -59,7 +61,7 @@ design_expect_dim <- function(x) {
 #' design_expect_unique_length(x)
 design_expect_unique_length <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_length(\n",
@@ -72,7 +74,7 @@ design_expect_unique_length <- function(x) {
 #' @rdname design
 design_expect_levels <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_equal(\nlevels(",
@@ -85,7 +87,7 @@ design_expect_levels <- function(x) {
 #' @rdname design
 design_expect_nlevels <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_equal(\nnlevels(",
@@ -100,7 +102,7 @@ design_expect_nlevels <- function(x) {
 #' design_expect_nrow(mtcars)
 design_expect_nrow <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_equal(\nnrow(",
@@ -115,7 +117,7 @@ design_expect_nrow <- function(x) {
 #' design_expect_ncol(mtcars)
 design_expect_ncol <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_equal(\nncol(",
@@ -130,7 +132,7 @@ design_expect_ncol <- function(x) {
 #' design_expect_names(iris) %>% seal()
 design_expect_names <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0(
     "expect_named(\n",
@@ -144,8 +146,8 @@ design_expect_names <- function(x) {
 #' @example
 #' design_expect_varclass(iris)
 design_expect_varclass <- function(x) {
-  object_name <- as.list(match.call())$x
 
+  object_name <- deparse(as.list(match.call())$x)
 
   paste0("expect_equal(\n",
          object_name,
@@ -162,7 +164,7 @@ design_expect_varclass <- function(x) {
 #' design_expect_class(iris)
 design_expect_class <- function(x) {
 
-  object_name <- as.list(match.call())$x
+  object_name <- deparse(as.list(match.call())$x)
 
   if (isS4(x) == TRUE) {
 

@@ -11,6 +11,12 @@ test_that("multiplication works", {
     "expect_equal(\nncol(mtcars),\n11L)"
   )
 
+  # Fixed #2
+  expect_length(
+    design_expect_length(x = c(letters, LETTERS)),
+    1L
+  )
+
   iris_s4 <- asS4(iris)
   expect_equal(
     design_expect_class(iris_s4),
