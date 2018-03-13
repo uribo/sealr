@@ -42,7 +42,7 @@ transcribe.numeric <- function(x) {
         get,
         call("design_expect_range", x = object_name)
       )),
-      '})'
+      "})"
     )
   )
 
@@ -76,7 +76,7 @@ transcribe.character <- function(x) {
         get,
         call("design_expect_range", x = object_name)
       )),
-      '})'
+      "})"
     )
   )
 }
@@ -109,7 +109,7 @@ transcribe.factor <- function(x) {
         get,
         call("design_expect_nlevels", x = object_name)
       )),
-      '})'
+      "})"
     )
   )
 }
@@ -142,7 +142,7 @@ transcribe.data.frame <- function(x) {
         get,
         call("design_expect_varclass", x = object_name)
       )),
-      '})'
+      "})"
     )
   )
 

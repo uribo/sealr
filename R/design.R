@@ -34,7 +34,7 @@ design_expect_range <- function(x) {
                object_name,
                "),\n",
                rlang::expr_text(range(x))),
-         ')')
+         ")")
 }
 
 #' @rdname design
