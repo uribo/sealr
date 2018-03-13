@@ -1,6 +1,6 @@
 context("test-object-context.R")
 
-test_that("collect object",{
+test_that("collect object", {
   expect_equal(
     nrow(collect_objects(ws = NULL)),
     0L
