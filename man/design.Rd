@@ -6,6 +6,7 @@
 \alias{design_expect_range}
 \alias{design_expect_dim}
 \alias{design_expect_unique_length}
+\alias{desing_expect_missings}
 \alias{design_expect_levels}
 \alias{design_expect_nlevels}
 \alias{design_expect_nrow}
@@ -22,6 +23,8 @@ design_expect_range(x)
 design_expect_dim(x)
 
 design_expect_unique_length(x)
+
+desing_expect_missings(x)
 
 design_expect_levels(x)
 

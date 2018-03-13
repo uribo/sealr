@@ -72,6 +72,22 @@ design_expect_unique_length <- function(x) {
 }
 
 #' @rdname design
+#' @example
+#' desing_expect_missings(x = c(1, NA, 3))
+desing_expect_missings <- function(x) {
+
+  object_name <- deparse(as.list(match.call())$x)
+
+  paste0(
+    "expect_equal(\nsum(is.na(",
+    object_name,
+    ")),\n",
+    rlang::expr_text(sum(is.na(x))),
+    ")")
+
+}
+
+#' @rdname design
 design_expect_levels <- function(x) {
 
   object_name <- deparse(as.list(match.call())$x)
