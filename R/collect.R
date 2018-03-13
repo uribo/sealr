@@ -5,7 +5,7 @@
 #' * filter_context
 #'
 #' @param context Types of \R{} object (`character`)
-#' @param ws which environment (work space) to search the available objects
+#' @param environment which environment (work space) to search the available objects
 #' @param ... Further arguments
 #'
 #' @name collect
@@ -22,20 +22,21 @@
 NULL
 
 #' @rdname collect
-collect_objects <- function(ws = NULL, ...) {
+collect_objects <- function(environment = NULL, ...) {
 
   . <- NULL
 
-  if (is.null(ws)) {
-    target <- ls(name = .GlobalEnv)
+  if (is.null(environment)) {
+    env <- .GlobalEnv
   } else {
-    target <- ls(name = ws)
+    env <- environment
   }
+    target <- ls(name = env)
 
   df <- tibble::data_frame(
     name = target,
     eval = target %>%
-      purrr::map(get),
+      purrr::map(~ get(..1, envir = env)),
     class = eval %>%
       purrr::map(class)) %>%
     dplyr::mutate(

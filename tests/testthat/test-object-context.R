@@ -10,12 +10,13 @@ test_that("collect object", {
 test_that("filter", {
 
   e <- new.env()
-  e$my_data1 <- iris
-  e$my_data2 <- mtcars
+  assign("my_data1", iris, e)
+  assign("my_data2", mtcars, e)
 
   withr::with_environment(
     e, {
-      res <- filter_context(context = "data.frame", ws = e) %>%
+      res <- filter_context(context = "data.frame",
+                            environment = e) %>%
         purrr::pmap(~ dim(..2))
 
       expect_is(

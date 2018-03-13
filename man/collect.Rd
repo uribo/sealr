@@ -6,12 +6,12 @@
 \alias{filter_context}
 \title{Collect \R{} object}
 \usage{
-collect_objects(ws = NULL, ...)
+collect_objects(environment = NULL, ...)
 
 filter_context(context = "function", ...)
 }
 \arguments{
-\item{ws}{which environment (work space) to search the available objects}
+\item{environment}{which environment (work space) to search the available objects}
 
 \item{...}{Further arguments}
 
