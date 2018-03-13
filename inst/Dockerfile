@@ -15,4 +15,5 @@ RUN install2.r \
   DT
 
 RUN installGithub.r \
-  'r-lib/devtools'
+  'r-lib/devtools' \
+  'tidyverse/reprex'
