@@ -5,8 +5,8 @@ RUN apt-get install -y \
   xclip xsel
 
 RUN install2.r \
-  cli \
   clipr \
+  clisymbols \
   rlang \
   usethis \
   withr
