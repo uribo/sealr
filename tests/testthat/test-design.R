@@ -17,6 +17,11 @@ test_that("multiplication works", {
     1L
   )
 
+  expect_equal(
+    desing_expect_missings(x = c(1, NA, 3)),
+    "expect_equal(\nsum(is.na(c(1, NA, 3))),\n1L)"
+  )
+
   iris_s4 <- asS4(iris)
   expect_equal(
     design_expect_class(iris_s4),
