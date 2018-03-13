@@ -2,7 +2,7 @@ context("test-object-context.R")
 
 test_that("collect object", {
   expect_equal(
-    nrow(collect_objects(ws = NULL)),
+    nrow(collect_objects(environment = NULL)),
     0L
   )
 })
