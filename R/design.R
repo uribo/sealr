@@ -59,14 +59,15 @@ design_expect_dim <- function(x) {
 #' x <- c(1, 1, 3, 2)
 #' length(x)
 #' design_expect_unique_length(x)
+#' design_expect_unique_length(c("a", "a", "b"))
 design_expect_unique_length <- function(x) {
 
   object_name <- deparse(as.list(match.call())$x)
 
   paste0(
-    "expect_length(\n",
+    "expect_length(\nunique(",
     object_name,
-    ",\n",
+    "),\n",
     rlang::expr_text(length(unique(x))),
     ")")
 }
