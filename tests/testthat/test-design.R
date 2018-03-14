@@ -1,6 +1,6 @@
 context("test-design.R")
 
-test_that("multiplication works", {
+test_that("control transcript behavior functions", {
 
   expect_equal(
     design_expect_nrow(iris),
@@ -15,6 +15,11 @@ test_that("multiplication works", {
   expect_length(
     design_expect_length(x = c(letters, LETTERS)),
     1L
+  )
+
+  expect_equal(
+    design_expect_unique_length(c("a", "a", "b")),
+    "expect_length(\nunique(c(\"a\", \"a\", \"b\")),\n2L)"
   )
 
   expect_equal(
