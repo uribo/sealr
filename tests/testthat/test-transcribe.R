@@ -6,7 +6,7 @@ test_that("methods", {
   expect_equal(
     transcribe(x),
     # nolint start
-    "test_that(\"x\", {expect_is(\nx,\n\"numeric\")\nexpect_length(\nx ,\n 2L)\nexpect_length(\nx,\n2L)\nexpect_equal(\nrange( x ),\n c(1, 3))})"
+    "test_that(\"x\", {expect_is(\nx,\n\"numeric\")\nexpect_length(\nx ,\n 2L)\nexpect_length(\nunique(x),\n2L)\nexpect_equal(\nrange( x ),\n c(1, 3))})"
     # nolint end
   )
   expect_is(

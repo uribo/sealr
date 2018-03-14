@@ -8,4 +8,3 @@ sealr_timestamp <- function() {
                       utils::packageVersion("sealr")),
                     ")"))
 }
-
