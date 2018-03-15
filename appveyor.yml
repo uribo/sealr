@@ -11,8 +11,10 @@ install:
   ps: Bootstrap
 
 environment:
-  global:
-    USE_RTOOLS: true
+  R_VERSION: stable
+  USE_RTOOLS: true
+  GITHUB_PAT:
+    secure: 7aa7e6d5ffa6be6cacd4dafb6bbac8361542f196
 
 cache:
   - C:\RLibrary
