@@ -10,18 +10,13 @@
 #' x <- iris$Species; transcribe(x) %>% seal()
 #' transcribe(iris) %>% seal()
 #' }
-transcribe <- function(x, environment = NULL) {
+transcribe <- function(x) {
   UseMethod("transcribe")
 }
 
 #' @export
-transcribe.numeric <- function(x, environment = NULL) {
+transcribe.numeric <- function(x) {
   e <- compound(x)
-  if (is.null(environment)) {
-    env <- .GlobalEnv
-  } else {
-    env <- environment
-  }
 
   rlang::expr_interp(
     paste0(
@@ -57,13 +52,8 @@ transcribe.numeric <- function(x, environment = NULL) {
 }
 
 #' @export
-transcribe.character <- function(x, environment = NULL) {
+transcribe.character <- function(x) {
   e <- compound(x)
-  if (is.null(environment)) {
-    env <- .GlobalEnv
-  } else {
-    env <- environment
-  }
 
   rlang::expr_interp(
     paste0(
@@ -99,13 +89,8 @@ transcribe.character <- function(x, environment = NULL) {
 }
 
 #' @export
-transcribe.factor <- function(x, environment = NULL) {
+transcribe.factor <- function(x) {
   e <- compound(x)
-  if (is.null(environment)) {
-    env <- .GlobalEnv
-  } else {
-    env <- environment
-  }
 
   rlang::expr_interp(
     paste0(
@@ -140,13 +125,8 @@ transcribe.factor <- function(x, environment = NULL) {
 }
 
 #' @export
-transcribe.data.frame <- function(x, environment = NULL) {
+transcribe.data.frame <- function(x) {
   e <- compound(x)
-  if (is.null(environment)) {
-    env <- .GlobalEnv
-  } else {
-    env <- environment
-  }
 
   rlang::expr_interp(
     paste0(
@@ -178,5 +158,4 @@ transcribe.data.frame <- function(x, environment = NULL) {
       envir = e),
       "})"
     ))
-
 }
