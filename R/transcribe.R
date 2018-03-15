@@ -10,140 +10,173 @@
 #' x <- iris$Species; transcribe(x) %>% seal()
 #' transcribe(iris) %>% seal()
 #' }
-transcribe <- function(x) {
+transcribe <- function(x, environment = NULL) {
   UseMethod("transcribe")
 }
 
 #' @export
-transcribe.numeric <- function(x) {
-  object_name <- as.list(match.call())$x
+transcribe.numeric <- function(x, environment = NULL) {
+  e <- compound(x)
+  if (is.null(environment)) {
+    env <- .GlobalEnv
+  } else {
+    env <- environment
+  }
 
   rlang::expr_interp(
     paste0(
-      'test_that("',
-      object_name,
+      "test_that(\"",
+      get("obj", e),
       '", {',
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_class", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_class({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_length", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_length({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_unique_length", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_unique({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_range", x = object_name)
-      )),
-      "})"
-    )
-  )
-
-}
-
-#' @export
-transcribe.character <- function(x) {
-  object_name <- as.list(match.call())$x
-
-  rlang::expr_interp(
-    paste0(
-      'test_that("',
-      object_name,
-      '", {',
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_class", x = object_name)
-      )),
-      "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_length", x = object_name)
-      )),
-      "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_unique_length", x = object_name)
-      )),
-      "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_range", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_range({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "})"
     )
   )
 }
 
 #' @export
-transcribe.factor <- function(x) {
-  object_name <- as.list(match.call())$x
+transcribe.character <- function(x, environment = NULL) {
+  e <- compound(x)
+  if (is.null(environment)) {
+    env <- .GlobalEnv
+  } else {
+    env <- environment
+  }
 
   rlang::expr_interp(
     paste0(
-      'test_that("',
-      object_name,
+      "test_that(\"",
+      get("obj", e),
       '", {',
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_class", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_class({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_length", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_length({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_levels", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_unique({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_nlevels", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_range({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "})"
     )
   )
 }
 
 #' @export
-transcribe.data.frame <- function(x) {
-  object_name <- as.list(match.call())$x
+transcribe.factor <- function(x, environment = NULL) {
+  e <- compound(x)
+  if (is.null(environment)) {
+    env <- .GlobalEnv
+  } else {
+    env <- environment
+  }
 
   rlang::expr_interp(
     paste0(
-      'test_that("',
-      object_name,
+      "test_that(\"",
+      get("obj", e),
       '", {',
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_class", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_class({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_dim", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_length({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_names", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_levels({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "\n",
-      rlang::eval_tidy(match.call(
-        get,
-        call("design_expect_varclass", x = object_name)
-      )),
+      glue::evaluate(glue::glue(
+        "design_expect_nlevels({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
       "})"
-    )
-  )
+    ))
+}
+
+#' @export
+transcribe.data.frame <- function(x, environment = NULL) {
+  e <- compound(x)
+  if (is.null(environment)) {
+    env <- .GlobalEnv
+  } else {
+    env <- environment
+  }
+
+  rlang::expr_interp(
+    paste0(
+      "test_that(\"",
+      get("obj", e),
+      '", {',
+      glue::evaluate(glue::glue(
+        "design_expect_class({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
+      "\n",
+      glue::evaluate(glue::glue(
+        "design_expect_dim({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
+      "\n",
+      glue::evaluate(glue::glue(
+        "design_expect_names({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
+      "\n",
+      glue::evaluate(glue::glue(
+        "design_expect_varclass({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
+      "})"
+    ))
 
 }
