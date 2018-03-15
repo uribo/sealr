@@ -1,7 +1,7 @@
 context("test-seal.R")
 
 test_that("sealing", {
-  tests <- transcribe(3.14)
+  tests <- transcribe(letters)
 
   expect_silent(seal(tests, load_testthat = TRUE, clip = FALSE))
 
@@ -15,7 +15,7 @@ test_that("sealing", {
 })
 
 test_that("clip", {
-  tests <- transcribe(3.14)
+  tests <- transcribe(letters)
   skip_on_cran()
   skip_on_travis()
   # skip_on_appveyor()

@@ -7,6 +7,7 @@ RUN apt-get install -y \
 RUN install2.r \
   clipr \
   clisymbols \
+  glue \
   rlang \
   usethis \
   withr
@@ -16,4 +17,5 @@ RUN install2.r \
 
 RUN installGithub.r \
   'r-lib/devtools' \
-  'tidyverse/reprex'
+  'tidyverse/reprex' \
+  'r-lib/lobstr'
