@@ -31,6 +31,39 @@ test_that("methods", {
     "character"
   )
 
+  # FIXME
+  expect_error(
+    expect_message(
+    c(1, 3) %>% transcribe()
+  ))
+  expect_error(
+    expect_message(
+    data.frame(a = 1) %>% transcribe()
+  ))
+
+
+  expect_equal(
+    transcribe(letters),
+    letters %>% transcribe()
+  )
+  expect_equal(
+    transcribe(iris),
+    iris %>% transcribe()
+  )
+
+  e <- new.env()
+  x <- c(1, 3)
+  assign("x", x, e)
+  withr::with_environment(
+    e, {
+      expect_equal(
+        x %>% transcribe(),
+        # nolint start
+        "test_that(\"x\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x),\nc(1, 3)\n)})"
+        # nolint end
+      )
+    })
+
   expect_equal(
     transcribe(iris),
     # nolint start
