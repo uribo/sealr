@@ -17,7 +17,7 @@ test_that("methods", {
       )
       expect_equal(
         capture_output({
-          transcribe(my_species, environment = e) %>%
+          transcribe(my_species) %>%
             seal(clip = FALSE)
         },
         print = TRUE, width = 80),

@@ -4,12 +4,10 @@
 \alias{transcribe}
 \title{Transcribe \R{} object assert conditions}
 \usage{
-transcribe(x, environment = NULL)
+transcribe(x)
 }
 \arguments{
 \item{x}{\R{} object}
-
-\item{environment}{which environment (work space) to search the available objects}
 }
 \description{
 Transcribe \R{} object assert conditions
