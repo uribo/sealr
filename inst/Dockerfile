@@ -16,4 +16,5 @@ RUN install2.r \
 
 RUN installGithub.r \
   'r-lib/devtools' \
-  'tidyverse/reprex'
+  'tidyverse/reprex' \
+  'r-lib/lobstr'
