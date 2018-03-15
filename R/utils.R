@@ -9,6 +9,17 @@ sealr_timestamp <- function() {
                     ")"))
 }
 
+compound <- function(x) {
+  e <- new.env()
+
+  e$obj <- lhs_name(get("x", environment()))
+
+  if (length(e$obj) == 0) {
+    e$obj <- deparse(as.list(match.call())$x)
+  }
+  return(e)
+}
+
 lhs_obj <- function(x) {
 
   name <- mem <- NULL

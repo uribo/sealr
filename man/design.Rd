@@ -5,7 +5,7 @@
 \alias{design_expect_length}
 \alias{design_expect_range}
 \alias{design_expect_dim}
-\alias{design_expect_unique_length}
+\alias{design_expect_unique}
 \alias{desing_expect_missings}
 \alias{design_expect_levels}
 \alias{design_expect_nlevels}
@@ -22,7 +22,7 @@ design_expect_range(x)
 
 design_expect_dim(x)
 
-design_expect_unique_length(x)
+design_expect_unique(x)
 
 desing_expect_missings(x)
 
@@ -38,10 +38,12 @@ design_expect_names(x)
 
 design_expect_varclass(x)
 
-design_expect_class(x)
+design_expect_class(x, environment = NULL)
 }
 \arguments{
 \item{x}{\R{} object}
+
+\item{environment}{which environment (work space) to search the available objects}
 }
 \description{
 Print an \R{} object test result

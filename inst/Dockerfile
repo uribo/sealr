@@ -7,6 +7,7 @@ RUN apt-get install -y \
 RUN install2.r \
   clipr \
   clisymbols \
+  glue \
   rlang \
   usethis \
   withr
