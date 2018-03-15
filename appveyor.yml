@@ -10,14 +10,18 @@ init:
 install:
   ps: Bootstrap
 
+environment:
+  global:
+    USE_RTOOLS: true
+
 cache:
   - C:\RLibrary
 
 # Adapt as necessary starting from here
 
 build_script:
-  - travis-tool.sh install_deps
   - travis-tool.sh install_github r-lib/lobstr
+  - travis-tool.sh install_deps
 
 test_script:
   - travis-tool.sh run_tests
