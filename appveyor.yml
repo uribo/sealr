@@ -15,6 +15,12 @@ cache:
 
 # Adapt as necessary starting from here
 
+environment:
+  R_VERSION: stable
+  USE_RTOOLS: true
+  GITHUB_PAT:
+    secure: 7aa7e6d5ffa6be6cacd4dafb6bbac8361542f196
+
 build_script:
   - travis-tool.sh install_r Rcpp
   - travis-tool.sh install_deps
