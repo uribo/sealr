@@ -6,28 +6,20 @@ init:
         $ErrorActionPreference = "Stop"
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
-
 install:
   ps: Bootstrap
 
-cache:
-  - C:\RLibrary
-
 # Adapt as necessary starting from here
-
-environment:
-  R_VERSION: stable
-  USE_RTOOLS: true
-  GITHUB_PAT:
-    secure: 7aa7e6d5ffa6be6cacd4dafb6bbac8361542f196
-
 build_script:
-  - travis-tool.sh install_r Rcpp
+  - travis-tool.sh install_r devtools
+  - Rscript -e "devtools::install_github(\"r-lib/lobstr\")"
   - travis-tool.sh install_deps
-  - travis-tool.sh install_github r-lib/lobstr
 
 test_script:
   - travis-tool.sh run_tests
+
+on_success:
+  - Rscript -e "covr::codecov()"
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*
