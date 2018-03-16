@@ -22,11 +22,16 @@ compound <- function(x) {
 
 lhs_obj <- function(x) {
 
-  name <- mem <- NULL
+  environment <- name <- mem <- NULL
 
   load_envs <- search()
 
   df_objects <- tibble::data_frame(
+    environment = load_envs %>%
+      purrr::map(
+        ~ rep(.x[1], times = length(ls(.x[1])))
+      ) %>%
+      purrr::flatten_chr(),
     name = load_envs %>%
       purrr::map(
         ~ ls(.x)

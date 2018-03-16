@@ -29,12 +29,12 @@ test_that("check object conditions", {
       expect_equal(
         dim(x %>%
               lhs_obj()),
-        c(1, 3)
+        c(1, 4)
       )
       expect_named(
         x %>%
           lhs_obj(),
-        c("name", "mem", "class")
+        c("environment", "name", "mem", "class")
       )
       expect_equal(
         x %>%
