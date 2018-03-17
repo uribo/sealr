@@ -1,37 +1,50 @@
 context("test-object-context.R")
 
 test_that("collect object", {
-  expect_equal(
-    nrow(collect_objects(environment = NULL)),
-    0L
-  )
+  expect_gte(nrow(global_objects()),
+             1L)
+  expect_is(nms_objects(),
+            "data.frame")
+  expect_equal(nrow(nms_objects(pkgs = "package:datasets")),
+               104L)
+  expect_equal(dim(nms_objects(
+    pkgs = c("package:datasets", "package:utils")
+  )),
+  c(315, 3))
 })
 
 test_that("filter", {
+  expect_equal(ncol(
+    ls_objects(
+      class = "data.frame",
+      pkgs = "package:datasets",
+      nms = TRUE,
+      eval = TRUE
+    )
+  ),
+  4L)
 
-  e <- new.env()
-  assign("my_data1", iris, e)
-  assign("my_data2", mtcars, e)
-
-  withr::with_environment(
-    e, {
-      res <- filter_context(context = "data.frame",
-                            environment = e) %>%
-        purrr::pmap(~ dim(..2))
-
-      expect_is(
-        res,
-        "list")
-      expect_length(
-        res,
-        2L)
-      expect_equal(
-        res[[1]],
-        dim(iris))
-      expect_equal(
-        res[[2]],
-        dim(mtcars))
-    }
+  expect_message(
+    ls_objects(
+      class = "function",
+      pkgs = "package:ggplot2",
+      nms = TRUE,
+      eval = FALSE
+    ),
+    "The given environment is not stored any objects."
   )
 
+  e <- rlang::env()
+  withr::with_environment(e, {
+    suppressMessages(library(dplyr))
+    expect_is(
+      ls_objects(
+        class = "function",
+        pkgs = "package:dplyr",
+        nms = TRUE,
+        eval = FALSE
+      ),
+      "tbl"
+    )
+  })
 })

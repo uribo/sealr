@@ -2,37 +2,60 @@
 % Please edit documentation in R/collect.R
 \name{collect}
 \alias{collect}
-\alias{collect_objects}
-\alias{filter_context}
+\alias{global_objects}
+\alias{nms_objects}
+\alias{ls_objects}
 \title{Collect \R{} object}
 \usage{
-collect_objects(environment = NULL, ...)
+global_objects()
 
-filter_context(context = "function", ...)
+nms_objects(pkgs = NULL, ...)
+
+ls_objects(class = NULL, environment = ".GlobalEnv", eval = FALSE,
+  nms = FALSE, ...)
 }
 \arguments{
-\item{environment}{which environment (work space) to search the available objects}
+\item{pkgs}{The name of a package such as \code{package:<PACKAGE_NAME>}}
 
 \item{...}{Further arguments}
 
-\item{context}{Types of \R{} object (\code{character})}
+\item{class}{Class of \R{} object (\code{character})}
+
+\item{environment}{which environment (work space) to search the available objects}
+
+\item{eval}{which include evaluate value}
+
+\item{nms}{attached packages names}
 }
 \description{
 Collect \R{} object
 }
 \details{
 \itemize{
-\item filter_context
+\item ls_objects
 }
 }
 \examples{
 \dontrun{
+Return objects in .GlobaEnv
 my_iris <- iris
-filter_context("data.frame") \%>\%
-  purrr::pmap(~ dim(..2))
+ls_objects()
+# Filter by object class
+ls_objects("data.frame")
+# Storage a evaluate value
+ls_objects("data.frame", eval = TRUE)
 
-my_mtcars <- mtcars
-filter_context("data.frame") \%>\%
-purrr::pmap(~ names(..2))
+# Filter object class and environment
+ls_objects("data.frame",
+           nms = TRUE,
+           pkgs = "package:datasets")
+
+library(dplyr)
+ls_objects(c("function", "tbl"),
+           nms = TRUE,
+           pkgs = "package:dplyr")
+
+e <- rlang::env(my_data1 = iris, my_data2 = mtcars)
+ls_objects(environment = "e", nms = FALSE)
 }
 }

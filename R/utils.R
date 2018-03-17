@@ -9,6 +9,15 @@ sealr_timestamp <- function() {
                     ")"))
 }
 
+obj_eval <- function(df) {
+  df %>%
+    dplyr::mutate(
+      eval = purrr::pmap(.,
+                         ~ get(..2)
+      )
+    )
+}
+
 compound <- function(x) {
   e <- new.env()
 
