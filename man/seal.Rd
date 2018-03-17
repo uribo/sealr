@@ -5,7 +5,7 @@
 \alias{seal}
 \title{Sealing the test results}
 \usage{
-seal(test, load_testthat = FALSE, clip = TRUE)
+seal(test, load_testthat = FALSE, clip = TRUE, ts = TRUE)
 }
 \arguments{
 \item{test}{test}
@@ -20,7 +20,8 @@ Recording the state of the object
 }
 \examples{
 \dontrun{
-tests <- transcribe(3.14)
+x <- 3.14
+tests <- transcribe(x)
 seal(tests, load_testthat = TRUE)
 seal(tests, load_testthat = FALSE)
 seal(tests, load_testthat = FALSE, clip = FALSE)

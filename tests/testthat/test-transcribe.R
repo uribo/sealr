@@ -49,7 +49,7 @@ test_that("methods", {
       expect_equal(
         capture_output({
           transcribe(my_species) %>%
-            seal(clip = FALSE)
+            seal(clip = FALSE, ts = FALSE)
         },
         print = TRUE, width = 80),
         # nolint start

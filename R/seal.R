@@ -10,7 +10,8 @@
 #' @name seal
 #' @examples
 #' \dontrun{
-#' tests <- transcribe(3.14)
+#' x <- 3.14
+#' tests <- transcribe(x)
 #' seal(tests, load_testthat = TRUE)
 #' seal(tests, load_testthat = FALSE)
 #' seal(tests, load_testthat = FALSE, clip = FALSE)
@@ -19,7 +20,7 @@ NULL
 
 #' @rdname seal
 #' @export
-seal <- function(test, load_testthat = FALSE, clip = TRUE) {
+seal <- function(test, load_testthat = FALSE, clip = TRUE, ts = TRUE) {
 
   test_char <- test
 
@@ -41,6 +42,12 @@ seal <- function(test, load_testthat = FALSE, clip = TRUE) {
       res <- clipr::write_clip(res, "character", return_new = FALSE)
     }
 
+  if (ts == TRUE) {
+    res <- paste(sealr_timestamp(quiet = TRUE),
+                 test_char,
+                 sep = "\n") %>%
+      styler::style_text()
+  }
 
   return(res)
 }
