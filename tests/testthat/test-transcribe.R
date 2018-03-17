@@ -59,7 +59,7 @@ test_that("methods", {
       expect_equal(
         x %>% transcribe(),
         # nolint start
-        "test_that(\"x\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x),\nc(1, 3)\n)})"
+        "test_that(\"x\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x, na.rm = TRUE),\nc(1, 3)\n)})"
         # nolint end
       )
     })

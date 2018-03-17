@@ -24,15 +24,17 @@ design_length <- function(x) {
 #' @rdname design
 #' @example
 #' design_range(letters)
+#' x <- c(1, NA, 3, 5)
+#' design_range(x)
 design_range <- function(x) {
   e <- compound(x)
 
   as.character(glue::glue(
     glue::glue("expect_equal(
-               range({x}),
+               range({x}, na.rm = TRUE),
                \n",
                x = get("obj", e)),
-    rlang::expr_text(range(x)),
+    rlang::expr_text(range(x, na.rm = TRUE)),
     "\n)"
   ))
 }
