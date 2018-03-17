@@ -13,7 +13,8 @@ RUN install2.r \
   withr
 
 RUN install2.r \
-  DT
+  DT \
+  spelling
 
 RUN installGithub.r \
   'r-lib/devtools' \

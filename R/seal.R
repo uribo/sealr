@@ -1,6 +1,6 @@
 #' Sealing the test results
 #'
-#' @description aaa
+#' @description Recording the state of the object
 #'
 #' @param test test
 #' @param load_testthat include `library(testthat)` when *TRUE*

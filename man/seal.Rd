@@ -16,7 +16,7 @@ seal(test, load_testthat = FALSE, clip = TRUE)
 When clipr is not available, The clip arguments is forcibly \emph{FALSE}.}
 }
 \description{
-aaa
+Recording the state of the object
 }
 \examples{
 \dontrun{

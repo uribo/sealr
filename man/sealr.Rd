@@ -4,7 +4,7 @@
 \name{sealr}
 \alias{sealr}
 \alias{sealr-package}
-\title{ssss}
+\title{Sealing the R Objects Test and Assert Conditions}
 \description{
-ssss
+Sealing the R Objects Test and Assert Conditions
 }

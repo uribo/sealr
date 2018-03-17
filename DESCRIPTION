@@ -1,10 +1,12 @@
 Package: sealr
-Title: Sealing the R Objects Assert Conditions
+Title: Sealing the R Objects Test and Assert Conditions
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Shinya", family = "Uryu", email = "suika1127@gmail.com", role  = c("aut", "cre"), comment = c(ORCID = "0000-0002-0493-6186"))
     )
-Description: What the package does (one paragraph).
+Description: Record the state of R object. Outputs include object class and attributes. 
+  This helps reduce errors in test results by manual description. The goal is to improve 
+  the efficiency of data analysis and package development.
 License: MIT + file LICENSE
 URL: https://github.com/uribo/sealr
 BugReports: https://github.com/uribo/sealr/issues
@@ -32,3 +34,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
+Language: en-US
