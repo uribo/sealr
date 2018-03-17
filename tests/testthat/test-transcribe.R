@@ -47,12 +47,6 @@ test_that("methods", {
         # nolint end
       )
       expect_equal(
-        transcribe(table_obj),
-        # nolint start
-        "test_that(\"table_obj\", {expect_is(\ntable_obj,\n\"table\"\n)\nexpect_equal(\ndim(table_obj),\nc(2L, 2L)\n)\nexpect_equal(\ndimnames(table_obj),\nstructure(list(c(\"A\", \"B\"), c(\"0\", \"1\")), .Names = c(\"\", \"\"))\n)})"
-        # nolint end
-      )
-      expect_equal(
         capture_output({
           transcribe(my_species) %>%
             seal(clip = FALSE)
@@ -63,6 +57,18 @@ test_that("methods", {
         # nolint end
       )
       })
+
+  skip_on_travis()
+  withr::with_environment(
+    e, {
+      expect_equal(
+        transcribe(table_obj),
+        # nolint start
+        "test_that(\"table_obj\", {expect_is(\ntable_obj,\n\"table\"\n)\nexpect_equal(\ndim(table_obj),\nc(2L, 2L)\n)\nexpect_equal(\ndimnames(table_obj),\nstructure(list(c(\"A\", \"B\"), c(\"0\", \"1\")), .Names = c(\"\", \"\"))\n)})"
+        # nolint end
+      )
+    })
+
   expect_is(
     class(transcribe(letters)),
     "character"

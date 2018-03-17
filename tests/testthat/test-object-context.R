@@ -5,12 +5,12 @@ test_that("collect object", {
              1L)
   expect_is(nms_objects(),
             "data.frame")
-  expect_equal(nrow(nms_objects(pkgs = "package:datasets")),
-               104L)
-  expect_equal(dim(nms_objects(
+  expect_equal(dim(nms_objects(pkgs = "package:datasets")),
+               c(104, 3))
+  expect_gte(nrow(nms_objects(
     pkgs = c("package:datasets", "package:utils")
   )),
-  c(315, 3))
+  310L)
 })
 
 test_that("filter", {
