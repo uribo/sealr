@@ -2,43 +2,43 @@
 % Please edit documentation in R/design.R
 \name{design}
 \alias{design}
-\alias{design_expect_length}
-\alias{design_expect_range}
-\alias{design_expect_dim}
-\alias{design_expect_unique}
-\alias{desing_expect_missings}
-\alias{design_expect_levels}
-\alias{design_expect_nlevels}
-\alias{design_expect_nrow}
-\alias{design_expect_ncol}
-\alias{design_expect_names}
-\alias{design_expect_varclass}
-\alias{design_expect_class}
+\alias{design_length}
+\alias{design_range}
+\alias{design_dim}
+\alias{design_unique}
+\alias{desing_missings}
+\alias{design_levels}
+\alias{design_nlevels}
+\alias{design_nrow}
+\alias{design_ncol}
+\alias{design_names}
+\alias{design_varclass}
+\alias{design_class}
 \title{Print an \R{} object test result}
 \usage{
-design_expect_length(x)
+design_length(x)
 
-design_expect_range(x)
+design_range(x)
 
-design_expect_dim(x)
+design_dim(x)
 
-design_expect_unique(x)
+design_unique(x)
 
-desing_expect_missings(x)
+desing_missings(x)
 
-design_expect_levels(x)
+design_levels(x)
 
-design_expect_nlevels(x)
+design_nlevels(x)
 
-design_expect_nrow(x)
+design_nrow(x)
 
-design_expect_ncol(x)
+design_ncol(x)
 
-design_expect_names(x)
+design_names(x)
 
-design_expect_varclass(x)
+design_varclass(x)
 
-design_expect_class(x, environment = NULL)
+design_class(x, environment = NULL)
 }
 \arguments{
 \item{x}{\R{} object}
