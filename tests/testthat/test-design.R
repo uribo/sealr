@@ -34,8 +34,14 @@ test_that("control transcript behavior functions", {
 
   expect_message(
     expect_equal(
-      design_dimnames(x = matrix(1:10, nrow = 1, ncol = 2, dimnames = list("row", c("col1", "col2")))),
+      design_dimnames(
+        x = matrix(1:10,
+                   nrow = 1,
+                   ncol = 2,
+                   dimnames = list("row", c("col1", "col2")))),
+      # nolint start
       "expect_equal(\ndimnames(x),\nlist(\"row\", c(\"col1\", \"col2\"))\n)"
+      # nolint end
     )
   )
 
