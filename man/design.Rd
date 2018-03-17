@@ -12,6 +12,7 @@
 \alias{design_nrow}
 \alias{design_ncol}
 \alias{design_names}
+\alias{design_dimnames}
 \alias{design_varclass}
 \alias{design_class}
 \title{Print an \R{} object test result}
@@ -35,6 +36,8 @@ design_nrow(x)
 design_ncol(x)
 
 design_names(x)
+
+design_dimnames(x)
 
 design_varclass(x)
 

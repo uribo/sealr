@@ -32,6 +32,13 @@ test_that("control transcript behavior functions", {
     "expect_is(\niris,\n\"data.frame\"\n)"
   )
 
+  expect_message(
+    expect_equal(
+      design_dimnames(x = matrix(1:10, nrow = 1, ncol = 2, dimnames = list("row", c("col1", "col2")))),
+      "expect_equal(\ndimnames(x),\nlist(\"row\", c(\"col1\", \"col2\"))\n)"
+    )
+  )
+
   e <- new.env()
   iris_s4 <- asS4(iris)
   assign("iris_s4", iris_s4, e)

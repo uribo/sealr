@@ -14,6 +14,23 @@ transcribe <- function(x) {
   UseMethod("transcribe")
 }
 
+transcribe.default <- function(x) {
+  e <- compound(x)
+
+  rlang::expr_interp(
+    paste0(
+      "test_that(\"",
+      get("obj", e),
+      '", {',
+      glue::evaluate(glue::glue(
+        "design_class({x})",
+        x = get("obj", e)
+      ),
+      envir = e),
+      "})"
+    ))
+}
+
 #' @export
 transcribe.numeric <- function(x) {
   e <- compound(x)
@@ -125,6 +142,89 @@ transcribe.factor <- function(x) {
 }
 
 #' @export
+transcribe.list <- function(x) {
+  e <- compound(x)
+
+  rlang::expr_interp(paste0(
+    "test_that(\"",
+    get("obj", e),
+    '", {',
+    glue::evaluate(glue::glue(
+      "design_class({x})",
+      x = get("obj", e)
+      ),
+      envir = e),
+    "\n",
+    glue::evaluate(glue::glue(
+      "design_length({x})",
+      x = get("obj", e)
+    ),
+    envir = e),
+    "\n",
+    glue::evaluate(glue::glue("design_names({x})",
+                              x = get("obj", e)),
+                   envir = e),
+    "})"
+  ))
+}
+
+#' @export
+transcribe.matrix <- function(x) {
+  e <- compound(x)
+
+  rlang::expr_interp(paste0(
+    "test_that(\"",
+    get("obj", e),
+    '", {',
+    glue::evaluate(glue::glue(
+      "design_class({x})",
+      x = get("obj", e)
+    ),
+    envir = e),
+    "\n",
+    glue::evaluate(glue::glue(
+      "design_dim({x})",
+      x = get("obj", e)
+    ),
+    envir = e),
+    "\n",
+    glue::evaluate(
+      glue::glue("design_dimnames({x})",
+                 x = get("obj", e)),
+      envir = e),
+    "})"
+  ))
+}
+
+#' @export
+transcribe.table <- function(x) {
+  e <- compound(x)
+
+  rlang::expr_interp(paste0(
+    "test_that(\"",
+    get("obj", e),
+    '", {',
+    glue::evaluate(glue::glue(
+      "design_class({x})",
+      x = get("obj", e)
+    ),
+    envir = e),
+    "\n",
+    glue::evaluate(glue::glue(
+      "design_dim({x})",
+      x = get("obj", e)
+    ),
+    envir = e),
+    "\n",
+    glue::evaluate(
+      glue::glue("design_dimnames({x})",
+                 x = get("obj", e)),
+      envir = e),
+    "})"
+  ))
+}
+
+#' @export
 transcribe.data.frame <- function(x) {
   e <- compound(x)
 
@@ -133,29 +233,22 @@ transcribe.data.frame <- function(x) {
       "test_that(\"",
       get("obj", e),
       '", {',
-      glue::evaluate(glue::glue(
-        "design_class({x})",
-        x = get("obj", e)
-      ),
-      envir = e),
+      glue::evaluate(glue::glue("design_class({x})",
+                                x = get("obj", e)),
+                     envir = e),
       "\n",
-      glue::evaluate(glue::glue(
-        "design_dim({x})",
-        x = get("obj", e)
-      ),
-      envir = e),
+      glue::evaluate(glue::glue("design_dim({x})",
+                                x = get("obj", e)),
+                     envir = e),
       "\n",
-      glue::evaluate(glue::glue(
-        "design_names({x})",
-        x = get("obj", e)
-      ),
-      envir = e),
+      glue::evaluate(glue::glue("design_names({x})",
+                                x = get("obj", e)),
+                     envir = e),
       "\n",
-      glue::evaluate(glue::glue(
-        "design_varclass({x})",
-        x = get("obj", e)
-      ),
-      envir = e),
+      glue::evaluate(glue::glue("design_varclass({x})",
+                                x = get("obj", e)),
+                     envir = e),
       "})"
-    ))
+    )
+  )
 }

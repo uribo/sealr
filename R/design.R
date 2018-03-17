@@ -177,6 +177,20 @@ design_names <- function(x) {
 }
 
 #' @rdname design
+design_dimnames <- function(x) {
+  e <- compound(x)
+
+  as.character(glue::glue(
+    glue::glue("expect_equal(
+               dimnames({x}),
+               \n",
+               x = get("obj", e)),
+    rlang::expr_text(dimnames(x)),
+    "\n)"
+  ))
+}
+
+#' @rdname design
 #' @example
 #' design_varclass(iris)
 design_varclass <- function(x) {
