@@ -14,6 +14,8 @@ seal(test, load_testthat = FALSE, clip = TRUE, ts = TRUE)
 
 \item{clip}{If \emph{TRUE} will overwrite the system clipboard.
 When clipr is not available, The clip arguments is forcibly \emph{FALSE}.}
+
+\item{ts}{include comments that timestamp?}
 }
 \description{
 Recording the state of the object

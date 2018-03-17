@@ -6,6 +6,7 @@
 #' @param load_testthat include `library(testthat)` when *TRUE*
 #' @param clip If *TRUE* will overwrite the system clipboard.
 #' When clipr is not available, The clip arguments is forcibly *FALSE*.
+#' @param ts include comments that timestamp?
 #'
 #' @name seal
 #' @examples
