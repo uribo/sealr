@@ -23,7 +23,7 @@ test_that("control transcript behavior functions", {
   )
 
   expect_equal(
-    desing_missings(x = c(1, NA, 3)),
+    design_missings(x = c(1, NA, 3)),
     "expect_equal(\nsum(is.na(x)),\n1L\n)"
   )
 

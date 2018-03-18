@@ -6,7 +6,7 @@
 \alias{design_range}
 \alias{design_dim}
 \alias{design_unique}
-\alias{desing_missings}
+\alias{design_missings}
 \alias{design_levels}
 \alias{design_nlevels}
 \alias{design_nrow}
@@ -25,7 +25,7 @@ design_dim(x)
 
 design_unique(x)
 
-desing_missings(x)
+design_missings(x)
 
 design_levels(x)
 

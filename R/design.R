@@ -77,9 +77,9 @@ design_unique <- function(x) {
 #' @rdname design
 #' @example
 #' x <- c(1, NA, 3)
-#' desing_missings(x = x)
-#' desing_missings(c(1, NA, 3))
-desing_missings <- function(x) {
+#' design_missings(x = x)
+#' design_missings(c(1, NA, 3))
+design_missings <- function(x) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -246,3 +246,4 @@ design_class <- function(x, environment = NULL) {
     ))
   }
 }
+
