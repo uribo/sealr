@@ -23,7 +23,7 @@ Recording the state of the object
 \examples{
 \dontrun{
 x <- 3.14
-tests <- transcribe(x)
+tests <- transcribe(x, seal = FALSE)
 seal(tests, load_testthat = TRUE)
 seal(tests, load_testthat = FALSE)
 seal(tests, load_testthat = FALSE, clip = FALSE)

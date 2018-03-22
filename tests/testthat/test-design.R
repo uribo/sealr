@@ -7,8 +7,24 @@ test_that("control transcript behavior functions", {
     "expect_equal(\nnrow(iris),\n150L\n)"
   )
   expect_equal(
+    capture_output({
+      design_nrow(mtcars, seal = TRUE,
+                  load_testthat = TRUE, ts = FALSE, clip = FALSE)
+    },
+    print = TRUE, width = 80),
+    "library(testthat)\nexpect_equal(\n  nrow(mtcars),\n  32L\n)"
+  )
+  expect_equal(
     design_ncol(mtcars),
     "expect_equal(\nncol(mtcars),\n11L\n)"
+  )
+  expect_match(
+    capture_output({
+      design_ncol(mtcars, seal = TRUE,
+                   load_testthat = FALSE, ts = TRUE, clip = FALSE)
+    },
+    print = TRUE, width = 80),
+    "#' ℹ: Labeling on ."
   )
 
   # Fixed #2
@@ -21,15 +37,21 @@ test_that("control transcript behavior functions", {
     design_unique(c("a", "a", "b")),
     "expect_equal(\nunique(x),\nc(\"a\", \"b\")\n)"
   )
-
   expect_equal(
     design_missings(x = c(1, NA, 3)),
     "expect_equal(\nsum(is.na(x)),\n1L\n)"
   )
-
   expect_equal(
     design_class(iris),
     "expect_is(\niris,\n\"data.frame\"\n)"
+  )
+  expect_equal(
+    capture_output({
+      design_class(iris, seal = TRUE,
+                   load_testthat = FALSE, ts = FALSE, clip = FALSE)
+    },
+    print = TRUE, width = 80),
+    "expect_is(\n  iris,\n  \"data.frame\"\n)"
   )
 
   skip_if_not_installed("dplyr")

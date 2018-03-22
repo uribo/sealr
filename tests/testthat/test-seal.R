@@ -1,7 +1,7 @@
 context("test-seal.R")
 
 test_that("sealing", {
-  tests <- transcribe(letters)
+  tests <- transcribe(letters, seal = FALSE)
 
   expect_silent(seal(tests, load_testthat = TRUE, clip = FALSE))
 
@@ -11,11 +11,10 @@ test_that("sealing", {
     seal(tests, clip = TRUE),
     "clipr not available. check clipr configuration."
   )
-
 })
 
 test_that("clip", {
-  tests <- transcribe(letters)
+  tests <- transcribe(letters, seal = FALSE)
   skip_on_cran()
   skip_on_travis()
   # skip_on_appveyor()

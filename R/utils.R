@@ -85,3 +85,11 @@ lhs_name <- function(x) {
 
   return(res)
 }
+
+sealing <- function(x, seal = FALSE, ...) {
+  if (rlang::is_true(seal)) {
+    seal(x, ...)
+  } else {
+    x
+  }
+}

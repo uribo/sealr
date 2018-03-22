@@ -5,7 +5,7 @@ sealr <img src="man/figures/logo.png" align="right" width="120px" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/sealr)](https://cran.r-project.org/package=sealr) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/uribo/sealr.svg?branch=master)](https://travis-ci.org/uribo/sealr) [![Coverage status](https://codecov.io/gh/uribo/sealr/branch/master/graph/badge.svg)](https://codecov.io/github/uribo/sealr?branch=master)
 
-The goal of sealr is to ...
+The goal of sealr is to reduce the burden of writing unit tests and assertion that record the state of objects. Applying a function of sealr (`design_*()` or `transcribe()`) to the target object outputs the test code that record the current state.
 
 Installation
 ------------
@@ -25,8 +25,26 @@ library(sealr)
 ```
 
 ``` r
-transcribe(iris) %>% 
-  seal()
+x <- seq(1, 9, by = 2)
+
+design_class(x, seal = TRUE)
+#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
+#> expect_is(
+#>   x,
+#>   "numeric"
+#> )
+
+design_range(x, seal = TRUE)
+#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
+#> expect_equal(
+#>   range(x, na.rm = TRUE),
+#>   c(1, 9)
+#> )
+```
+
+``` r
+transcribe(iris)
+#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
 #> test_that("iris", {
 #>   expect_is(
 #>     iris,
@@ -49,8 +67,7 @@ transcribe(iris) %>%
 #>   )
 #> })
 
-transcribe(mtcars) %>% 
-  seal()
+transcribe(mtcars, load_testthat = FALSE, ts = FALSE)
 #> test_that("mtcars", {
 #>   expect_is(
 #>     mtcars,
@@ -77,8 +94,10 @@ transcribe(mtcars) %>%
 #> })
 ```
 
+### APIs
+
+-   `design_*()`
 -   `transcribe()`
--   `seal()`
 
 | Object Type  | Class | Size | Name |
 |--------------|-------|------|------|

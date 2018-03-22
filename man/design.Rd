@@ -18,36 +18,38 @@
 \alias{design_obj_size}
 \title{Print an \R{} object test result}
 \usage{
-design_length(x)
+design_length(x, ...)
 
-design_range(x)
+design_range(x, ...)
 
-design_dim(x)
+design_dim(x, ...)
 
-design_unique(x)
+design_unique(x, ...)
 
-design_missings(x)
+design_missings(x, ...)
 
-design_levels(x)
+design_levels(x, ...)
 
-design_nlevels(x)
+design_nlevels(x, ...)
 
-design_nrow(x)
+design_nrow(x, ...)
 
-design_ncol(x)
+design_ncol(x, ...)
 
-design_names(x)
+design_names(x, ...)
 
-design_dimnames(x)
+design_dimnames(x, ...)
 
-design_varclass(x)
+design_varclass(x, ...)
 
-design_class(x, environment = NULL)
+design_class(x, environment = NULL, ...)
 
-design_obj_size(x)
+design_obj_size(x, ...)
 }
 \arguments{
 \item{x}{\R{} object}
+
+\item{...}{Further arguments to \code{\link[=seal]{seal()}}}
 
 \item{environment}{which environment (work space) to search the available objects}
 }

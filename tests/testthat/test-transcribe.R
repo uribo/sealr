@@ -25,31 +25,30 @@ test_that("methods", {
   withr::with_environment(
     e, {
       expect_equal(
-        transcribe(date_obj),
+        transcribe(date_obj, seal = FALSE),
         "test_that(\"date_obj\", {expect_is(\ndate_obj,\n\"Date\"\n)})"
       )
       expect_equal(
-        transcribe(x),
+        transcribe(x, seal = FALSE),
         # nolint start
         "test_that(\"x\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x, na.rm = TRUE),\nc(1, 3)\n)})"
         # nolint end
       )
       expect_equal(
-        transcribe(list_obj),
+        transcribe(list_obj, seal = FALSE),
         # nolint start
         "test_that(\"list_obj\", {expect_is(\nlist_obj,\n\"list\"\n)\nexpect_length(\nlist_obj,\n3L\n)\nexpect_named(\nlist_obj,\nc(\"a\", \"b\", \"\")\n)})"
         # nolint end
       )
       expect_equal(
-        transcribe(matrix_obj),
+        transcribe(matrix_obj, seal = FALSE),
         # nolint start
         "test_that(\"matrix_obj\", {expect_is(\nmatrix_obj,\n\"matrix\"\n)\nexpect_equal(\ndim(matrix_obj),\n1:2\n)\nexpect_equal(\ndimnames(matrix_obj),\nlist(\"row\", c(\"col1\", \"col2\"))\n)})"
         # nolint end
       )
       expect_equal(
         capture_output({
-          transcribe(my_species) %>%
-            seal(clip = FALSE, ts = FALSE)
+          transcribe(my_species, seal = TRUE, clip = FALSE, ts = FALSE)
         },
         print = TRUE, width = 80),
         # nolint start
@@ -62,7 +61,7 @@ test_that("methods", {
   withr::with_environment(
     e, {
       expect_equal(
-        transcribe(table_obj),
+        transcribe(table_obj, seal = FALSE),
         # nolint start
         "test_that(\"table_obj\", {expect_is(\ntable_obj,\n\"table\"\n)\nexpect_equal(\ndim(table_obj),\nc(2L, 2L)\n)\nexpect_equal(\ndimnames(table_obj),\nstructure(list(c(\"A\", \"B\"), c(\"0\", \"1\")), .Names = c(\"\", \"\"))\n)})"
         # nolint end
@@ -70,7 +69,7 @@ test_that("methods", {
     })
 
   expect_is(
-    class(transcribe(letters)),
+    class(transcribe(letters, seal = FALSE)),
     "character"
   )
 
@@ -85,12 +84,12 @@ test_that("methods", {
   ))
 
   expect_equal(
-    transcribe(letters),
-    letters %>% transcribe()
+    transcribe(letters, seal = FALSE),
+    letters %>% transcribe(seal = FALSE)
   )
   expect_equal(
-    transcribe(iris),
-    iris %>% transcribe()
+    transcribe(iris, seal = FALSE),
+    iris %>% transcribe(seal = FALSE)
   )
 
   e <- new.env()
@@ -99,7 +98,7 @@ test_that("methods", {
   withr::with_environment(
     e, {
       expect_equal(
-        x %>% transcribe(),
+        x %>% transcribe(seal = FALSE),
         # nolint start
         "test_that(\"x\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x, na.rm = TRUE),\nc(1, 3)\n)})"
         # nolint end
@@ -107,7 +106,7 @@ test_that("methods", {
     })
 
   expect_equal(
-    transcribe(iris),
+    transcribe(iris, seal = FALSE),
     # nolint start
     "test_that(\"iris\", {expect_is(\niris,\n\"data.frame\"\n)\nexpect_equal(\ndim(iris),\nc(150L, 5L)\n)\nexpect_named(\niris,\nc(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\", \n\"Species\")\n)\nexpect_equal(\niris %>% purrr::map_chr(class) %>% unname(),\nc(\"numeric\", \"numeric\", \"numeric\", \"numeric\", \"factor\")\n)})"
     # nolint end
@@ -117,13 +116,12 @@ test_that("methods", {
   withr::with_package(
     "dplyr", {
       expect_equal(
-        transcribe(band_members),
+        transcribe(band_members, seal = FALSE),
         # nolint start
         "test_that(\"band_members\", {expect_is(\nband_members,\nc(\"tbl_df\", \"tbl\", \"data.frame\")\n)\nexpect_equal(\ndim(band_members),\nc(3L, 2L)\n)\nexpect_named(\nband_members,\nc(\"name\", \"band\")\n)\nexpect_equal(\nband_members %>% purrr::map_chr(class) %>% unname(),\nc(\"character\", \"character\")\n)})"
         # nolint end
       )
     }
   )
-
 
 })

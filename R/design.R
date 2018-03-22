@@ -1,6 +1,7 @@
 #' Print an \R{} object test result
 #'
 #' @param x \R{} object
+#' @param ... Further arguments to [seal()]
 #' @inheritParams collect
 #' @name design
 NULL
@@ -8,7 +9,8 @@ NULL
 #' @rdname design
 #' @example
 #' design_length(letters)
-design_length <- function(x) {
+#' @export
+design_length <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -18,7 +20,8 @@ design_length <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(length(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
@@ -26,7 +29,8 @@ design_length <- function(x) {
 #' design_range(letters)
 #' x <- c(1, NA, 3, 5)
 #' design_range(x)
-design_range <- function(x) {
+#' @export
+design_range <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -36,13 +40,15 @@ design_range <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(range(x, na.rm = TRUE)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
 #' @example
 #' design_dim(iris)
-design_dim <- function(x) {
+#' @export
+design_dim <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -52,7 +58,8 @@ design_dim <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(dim(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
@@ -60,8 +67,9 @@ design_dim <- function(x) {
 #' x <- c(1, 1, 3, 2)
 #' length(x)
 #' design_unique(x)
-#' design_unique(c("a", "a", "b"))
-design_unique <- function(x) {
+#' design_unique(c("a", "a", "b"), seal = TRUE)
+#' @export
+design_unique <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -71,7 +79,8 @@ design_unique <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(unique(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
@@ -79,7 +88,8 @@ design_unique <- function(x) {
 #' x <- c(1, NA, 3)
 #' design_missings(x = x)
 #' design_missings(c(1, NA, 3))
-design_missings <- function(x) {
+#' @export
+design_missings <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -89,7 +99,8 @@ design_missings <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(sum(is.na(x))),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
@@ -97,7 +108,8 @@ design_missings <- function(x) {
 #' my_species <- iris$Species
 #' design_levels(my_species)
 #' my_species %>% design_levels()
-design_levels <- function(x) {
+#' @export
+design_levels <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -107,15 +119,17 @@ design_levels <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(levels(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
 #' @example
 #' my_species <- iris$Species
-#' design_nlevels(my_species)
+#' design_nlevels(my_species, seal = FALSE, ts = FALSE)
 #' my_species %>% design_nlevels()
-design_nlevels <- function(x) {
+#' @export
+design_nlevels <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -125,13 +139,15 @@ design_nlevels <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(nlevels(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
 #' @example
 #' design_nrow(mtcars)
-design_nrow <- function(x) {
+#' @export
+design_nrow <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -141,13 +157,15 @@ design_nrow <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(nrow(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
 #' @example
 #' design_ncol(mtcars)
-design_ncol <- function(x) {
+#' @export
+design_ncol <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -157,13 +175,15 @@ design_ncol <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(ncol(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
 #' @example
 #' design_names(iris)
-design_names <- function(x) {
+#' @export
+design_names <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -173,11 +193,13 @@ design_names <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(names(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
-design_dimnames <- function(x) {
+#' @export
+design_dimnames <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -187,13 +209,15 @@ design_dimnames <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(dimnames(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
 #' @example
 #' design_varclass(iris)
-design_varclass <- function(x) {
+#' @export
+design_varclass <- function(x, ...) {
   e <- compound(x)
 
   as.character(glue::glue(
@@ -207,14 +231,16 @@ design_varclass <- function(x) {
                        purrr::map_chr(class) %>%
                        unname()),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
 
 #' @rdname design
 #' @example
 #' design_class(letters)
 #' design_class(iris)
-design_class <- function(x, environment = NULL) {
+#' @export
+design_class <- function(x, environment = NULL, ...) {
   e <- compound(x)
 
   if (is.null(environment)) {
@@ -226,7 +252,7 @@ design_class <- function(x, environment = NULL) {
   if (isS4(glue::evaluate(glue::glue("{x}",
                                      x = get("obj", e)),
                           envir = env)) == TRUE) {
-    as.character(glue::glue(
+    res <- as.character(glue::glue(
       glue::glue("expect_s4_class(
                  {x},
                  \n",
@@ -236,7 +262,7 @@ design_class <- function(x, environment = NULL) {
     ))
 
   } else {
-    as.character(glue::glue(
+    res <- as.character(glue::glue(
       glue::glue("expect_is(
                  {x},
                  \n",
@@ -245,13 +271,18 @@ design_class <- function(x, environment = NULL) {
       "\n)"
     ))
   }
+  sealing(res, ...)
 }
 
 #' @rdname design
 #' @example
-#' design_obj_size(iris)
+#' design_obj_size(iris,
+#'                 seal = TRUE,
+#'                 load_testthat = TRUE,
+#'                 clip = FALSE)
 #' design_obj_size(letters)
-design_obj_size <- function(x) {
+#' @export
+design_obj_size <- function(x, ...) {
 
   e <- compound(x)
 
@@ -262,5 +293,6 @@ design_obj_size <- function(x) {
                x = get("obj", e)),
     rlang::expr_text(lobstr::obj_size(x)),
     "\n)"
-  ))
+  )) %>%
+    sealing(...)
 }
