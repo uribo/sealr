@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 [![CRAN status](https://www.r-pkg.org/badges/version/sealr)](https://cran.r-project.org/package=sealr) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/uribo/sealr.svg?branch=master)](https://travis-ci.org/uribo/sealr) [![Coverage status](https://codecov.io/gh/uribo/sealr/branch/master/graph/badge.svg)](https://codecov.io/github/uribo/sealr?branch=master)
 
-The goal of sealr is to ...
+The goal of sealr is to reduce the burden of writing unit tests and assertion that record the state of objects.  Applying a function of sealr (`design_*()` or `transcribe()`) to the target object outputs the test code that record the current state.
 
 ## Installation
 
@@ -33,17 +33,25 @@ devtools::install_github("uribo/sealr")
 library(sealr)
 ```
 
-```{r, warning = FALSE}
-transcribe(iris) %>% 
-  seal()
+```{r}
+x <- seq(1, 9, by = 2)
 
-transcribe(mtcars) %>% 
-  seal()
+design_class(x, seal = TRUE)
+
+design_range(x, seal = TRUE)
 ```
 
 
+```{r, warning = FALSE}
+transcribe(iris)
+
+transcribe(mtcars, load_testthat = FALSE, ts = FALSE)
+```
+
+### APIs
+
+- `design_*()`
 - `transcribe()`
-- `seal()`
 
 | Object Type | Class | Size | Name |
 |-------------|-------|------|------|
