@@ -32,6 +32,16 @@ test_that("control transcript behavior functions", {
     "expect_is(\niris,\n\"data.frame\"\n)"
   )
 
+  skip_if_not_installed("dplyr")
+  withr::with_package(
+    "dplyr", {
+      expect_equal(
+        design_class(band_members),
+        "expect_is(\nband_members,\nc(\"tbl_df\", \"tbl\", \"data.frame\")\n)"
+      )
+    }
+  )
+
   expect_message(
     expect_equal(
       design_dimnames(
