@@ -247,3 +247,20 @@ design_class <- function(x, environment = NULL) {
   }
 }
 
+#' @rdname design
+#' @example
+#' design_obj_size(iris)
+#' design_obj_size(letters)
+design_obj_size <- function(x) {
+
+  e <- compound(x)
+
+  as.character(glue::glue(
+    glue::glue("expect_equal(
+               lobstr::obj_size({x}),
+               \n",
+               x = get("obj", e)),
+    rlang::expr_text(lobstr::obj_size(x)),
+    "\n)"
+  ))
+}
