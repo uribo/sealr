@@ -4,20 +4,24 @@
 \alias{transcribe}
 \title{Transcribe \R{} object assert conditions}
 \usage{
-transcribe(x)
+transcribe(x, seal = TRUE, ...)
 }
 \arguments{
 \item{x}{\R{} object}
+
+\item{seal}{which output testthat script}
+
+\item{...}{Further arguments to \code{\link[=seal]{seal()}}}
 }
 \description{
 Transcribe \R{} object assert conditions
 }
 \examples{
 \dontrun{
-x <- 1:3L; transcribe(x) \%>\% seal()
-transcribe(3.14) \%>\% seal()
-transcribe(letters) \%>\% seal()
-x <- iris$Species; transcribe(x) \%>\% seal()
-transcribe(iris) \%>\% seal()
+x <- 1:3L; transcribe(x)
+transcribe(3.14, seal = FALSE)
+transcribe(letters, load_testthat = TRUE, ts = FALSE)
+x <- iris$Species; transcribe(x)
+transcribe(iris)
 }
 }
