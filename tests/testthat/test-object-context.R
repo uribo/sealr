@@ -24,6 +24,7 @@ test_that("filter", {
   ),
   4L)
 
+  skip_on_os("mac")
   expect_message(
     ls_objects(
       class = "function",
