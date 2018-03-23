@@ -1,6 +1,7 @@
 #' Transcribe \R{} object assert conditions
 #'
 #' @inheritParams design
+#' @param desc test name. Default adopt object name.
 #' @param seal which output testthat script
 #' @inheritDotParams seal -test
 #' @export
@@ -12,17 +13,17 @@
 #' x <- iris$Species; transcribe(x)
 #' transcribe(iris)
 #' }
-transcribe <- function(x, seal = TRUE, ...) {
+transcribe <- function(x, desc = NULL, seal = TRUE, ...) {
   UseMethod("transcribe")
 }
 
-transcribe.default <- function(x, seal = TRUE, ...) {
+transcribe.default <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      get("obj", e),
+      dplyr::if_else(is.null(desc), get("obj", e), desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -35,13 +36,13 @@ transcribe.default <- function(x, seal = TRUE, ...) {
 }
 
 #' @export
-transcribe.numeric <- function(x, seal = TRUE, ...) {
+transcribe.numeric <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      get("obj", e),
+      dplyr::if_else(is.null(desc), get("obj", e), desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -73,13 +74,13 @@ transcribe.numeric <- function(x, seal = TRUE, ...) {
 }
 
 #' @export
-transcribe.character <- function(x, seal = TRUE, ...) {
+transcribe.character <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      get("obj", e),
+      dplyr::if_else(is.null(desc), get("obj", e), desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -111,13 +112,13 @@ transcribe.character <- function(x, seal = TRUE, ...) {
 }
 
 #' @export
-transcribe.factor <- function(x, seal = TRUE, ...) {
+transcribe.factor <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      get("obj", e),
+      dplyr::if_else(is.null(desc), get("obj", e), desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -148,12 +149,12 @@ transcribe.factor <- function(x, seal = TRUE, ...) {
 }
 
 #' @export
-transcribe.list <- function(x, seal = TRUE, ...) {
+transcribe.list <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(paste0(
     "test_that(\"",
-    get("obj", e),
+    dplyr::if_else(is.null(desc), get("obj", e), desc),
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
@@ -176,12 +177,12 @@ transcribe.list <- function(x, seal = TRUE, ...) {
 }
 
 #' @export
-transcribe.matrix <- function(x, seal = TRUE, ...) {
+transcribe.matrix <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(paste0(
     "test_that(\"",
-    get("obj", e),
+    dplyr::if_else(is.null(desc), get("obj", e), desc),
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
@@ -205,12 +206,12 @@ transcribe.matrix <- function(x, seal = TRUE, ...) {
 }
 
 #' @export
-transcribe.table <- function(x, seal = TRUE, ...) {
+transcribe.table <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(paste0(
     "test_that(\"",
-    get("obj", e),
+    dplyr::if_else(is.null(desc), get("obj", e), desc),
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
@@ -234,13 +235,13 @@ transcribe.table <- function(x, seal = TRUE, ...) {
 }
 
 #' @export
-transcribe.data.frame <- function(x, seal = TRUE, ...) {
+transcribe.data.frame <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      get("obj", e),
+      dplyr::if_else(is.null(desc), get("obj", e), desc),
       '", {',
       glue::evaluate(glue::glue("design_class({x})",
                                 x = get("obj", e)),

@@ -4,10 +4,12 @@
 \alias{transcribe}
 \title{Transcribe \R{} object assert conditions}
 \usage{
-transcribe(x, seal = TRUE, ...)
+transcribe(x, desc = NULL, seal = TRUE, ...)
 }
 \arguments{
 \item{x}{\R{} object}
+
+\item{desc}{test name. Default adopt object name.}
 
 \item{seal}{which output testthat script}
 

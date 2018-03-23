@@ -25,7 +25,7 @@ test_that("methods", {
   withr::with_environment(
     e, {
       expect_equal(
-        transcribe(date_obj, seal = FALSE),
+        transcribe(date_obj, desc = NULL, seal = FALSE),
         "test_that(\"date_obj\", {expect_is(\ndate_obj,\n\"Date\"\n)})"
       )
       expect_equal(
@@ -48,11 +48,11 @@ test_that("methods", {
       )
       expect_equal(
         capture_output({
-          transcribe(my_species, seal = TRUE, clip = FALSE, ts = FALSE)
+          transcribe(my_species, desc = "Prove the state of the Species", seal = TRUE, clip = FALSE, ts = FALSE)
         },
         print = TRUE, width = 80),
         # nolint start
-        "test_that(\"my_species\", {\n  expect_is(\n    my_species,\n    \"factor\"\n  )\n  expect_length(\n    my_species,\n    150L\n  )\n  expect_equal(\n    levels(my_species),\n    c(\"setosa\", \"versicolor\", \"virginica\")\n  )\n  expect_equal(\n    nlevels(my_species),\n    3L\n  )\n})"
+        "test_that(\"Prove the state of the Species\", {\n  expect_is(\n    my_species,\n    \"factor\"\n  )\n  expect_length(\n    my_species,\n    150L\n  )\n  expect_equal(\n    levels(my_species),\n    c(\"setosa\", \"versicolor\", \"virginica\")\n  )\n  expect_equal(\n    nlevels(my_species),\n    3L\n  )\n})"
         # nolint end
       )
       })
