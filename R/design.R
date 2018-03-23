@@ -7,7 +7,7 @@
 NULL
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_length(letters)
 #' @export
 design_length <- function(x, ...) {
@@ -25,7 +25,7 @@ design_length <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_range(letters)
 #' x <- c(1, NA, 3, 5)
 #' design_range(x)
@@ -45,7 +45,7 @@ design_range <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_dim(iris)
 #' @export
 design_dim <- function(x, ...) {
@@ -63,7 +63,7 @@ design_dim <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' x <- c(1, 1, 3, 2)
 #' length(x)
 #' design_unique(x)
@@ -84,7 +84,7 @@ design_unique <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' x <- c(1, NA, 3)
 #' design_missings(x = x)
 #' design_missings(c(1, NA, 3))
@@ -104,7 +104,7 @@ design_missings <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' my_species <- iris$Species
 #' design_levels(my_species)
 #' my_species %>% design_levels()
@@ -124,7 +124,7 @@ design_levels <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' my_species <- iris$Species
 #' design_nlevels(my_species, seal = FALSE, ts = FALSE)
 #' my_species %>% design_nlevels()
@@ -144,7 +144,7 @@ design_nlevels <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_nrow(mtcars)
 #' @export
 design_nrow <- function(x, ...) {
@@ -162,7 +162,7 @@ design_nrow <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_ncol(mtcars)
 #' @export
 design_ncol <- function(x, ...) {
@@ -180,7 +180,7 @@ design_ncol <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_names(iris)
 #' @export
 design_names <- function(x, ...) {
@@ -214,7 +214,7 @@ design_dimnames <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_varclass(iris)
 #' @export
 design_varclass <- function(x, ...) {
@@ -236,7 +236,7 @@ design_varclass <- function(x, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_class(letters)
 #' design_class(iris)
 #' @export
@@ -275,7 +275,7 @@ design_class <- function(x, environment = NULL, ...) {
 }
 
 #' @rdname design
-#' @example
+#' @examples
 #' design_obj_size(iris,
 #'                 seal = TRUE,
 #'                 load_testthat = TRUE,

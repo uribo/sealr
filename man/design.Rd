@@ -56,3 +56,34 @@ design_obj_size(x, ...)
 \description{
 Print an \R{} object test result
 }
+\examples{
+design_length(letters)
+design_range(letters)
+x <- c(1, NA, 3, 5)
+design_range(x)
+design_dim(iris)
+x <- c(1, 1, 3, 2)
+length(x)
+design_unique(x)
+design_unique(c("a", "a", "b"), seal = TRUE)
+x <- c(1, NA, 3)
+design_missings(x = x)
+design_missings(c(1, NA, 3))
+my_species <- iris$Species
+design_levels(my_species)
+my_species \%>\% design_levels()
+my_species <- iris$Species
+design_nlevels(my_species, seal = FALSE, ts = FALSE)
+my_species \%>\% design_nlevels()
+design_nrow(mtcars)
+design_ncol(mtcars)
+design_names(iris)
+design_varclass(iris)
+design_class(letters)
+design_class(iris)
+design_obj_size(iris,
+                seal = TRUE,
+                load_testthat = TRUE,
+                clip = FALSE)
+design_obj_size(letters)
+}
