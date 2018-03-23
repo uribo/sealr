@@ -49,7 +49,13 @@ design_obj_size(x, ...)
 \arguments{
 \item{x}{\R{} object}
 
-\item{...}{Further arguments to \code{\link[=seal]{seal()}}}
+\item{...}{Arguments passed on to \code{seal}
+\describe{
+  \item{load_testthat}{include \code{library(testthat)} when \emph{TRUE}}
+  \item{clip}{If \emph{TRUE} will overwrite the system clipboard.
+When clipr is not available, The clip arguments is forcibly \emph{FALSE}.}
+  \item{ts}{include comments that timestamp?}
+}}
 
 \item{environment}{which environment (work space) to search the available objects}
 }

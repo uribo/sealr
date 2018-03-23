@@ -1,8 +1,8 @@
 #' Print an \R{} object test result
 #'
 #' @param x \R{} object
-#' @param ... Further arguments to [seal()]
-#' @inheritParams collect
+#' @inheritDotParams seal -test
+#' @param environment which environment (work space) to search the available objects
 #' @name design
 NULL
 

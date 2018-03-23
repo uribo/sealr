@@ -2,6 +2,7 @@
 #'
 #' @inheritParams design
 #' @param seal which output testthat script
+#' @inheritDotParams seal -test
 #' @export
 #' @examples
 #' \dontrun{
