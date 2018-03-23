@@ -38,9 +38,9 @@ seal <- function(test, load_testthat = FALSE, clip = TRUE, ts = TRUE) {
 
   if (clip == TRUE)
     if (clipr::clipr_available() == FALSE) {
-      rlang::warn("clipr not available. check clipr configuration.")
+      rlang::warn("clipr not available. check clipr configuration.") # nocov
     } else {
-      res <- clipr::write_clip(res, "character", return_new = FALSE)
+      res <- clipr::write_clip(res, "character", return_new = FALSE) # nocov
     }
 
   if (ts == TRUE) {

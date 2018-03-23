@@ -24,16 +24,13 @@ test_that("filter", {
   ),
   4L)
 
-  skip_on_os("mac")
-  expect_message(
-    ls_objects(
-      class = "function",
-      pkgs = "package:ggplot2",
-      nms = TRUE,
-      eval = FALSE
-    ),
-    "The given environment is not stored any objects."
-  )
+  e <- rlang::env()
+  withr::with_environment(e, {
+    expect_message(
+      ls_objects(environment = .GlobalEnv),
+      "The given environment is not stored any objects."
+    )
+  })
 
   e <- rlang::env()
   withr::with_environment(e, {
