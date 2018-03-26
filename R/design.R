@@ -223,12 +223,12 @@ design_varclass <- function(x, ...) {
   as.character(glue::glue(
     glue::glue(
       "expect_equal(
-      {x} %>% purrr::map_chr(class) %>% unname(),
+      {x} %>% purrr::map(class) %>% unname(),
       \n",
       x = get("obj", e)
     ),
     rlang::expr_text(x %>%
-                       purrr::map_chr(class) %>%
+                       purrr::map(class) %>%
                        unname()),
     "\n)"
   )) %>%
