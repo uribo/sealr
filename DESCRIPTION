@@ -28,7 +28,8 @@ Suggests:
     covr (>= 3.0.1),
     sf,
     testthat (>= 2.0.0),
-    tst
+    tst,
+    withr
 Remotes:
     r-lib/lobstr,
     uribo/tst

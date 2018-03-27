@@ -1,17 +1,26 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
+sudo: required
 cache: packages
+dist: trusty
 
 r:
 - oldrel
 - release
 - devel
 
+before_install:
+  - sudo add-apt-repository ppa:ubuntugis/ppa --yes
+  - sudo apt-get --yes --force-yes update -qq
+  - sudo apt-get install --yes libudunits2-dev libproj-dev libgeos-dev libgdal-dev
+
+warnings_are_errors: true
+
 r_github_packages:
   - jimhester/lintr
   - r-lib/lobstr
+  - uribo/sealr
 
 after_success:
   - Rscript -e 'covr::codecov(); lintr::lint_package()'
