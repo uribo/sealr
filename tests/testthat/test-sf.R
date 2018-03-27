@@ -44,6 +44,7 @@ test_that("integration tst", {
   assign("sf_point", sf_point, e)
   withr::with_environment(
     e, {
+      skip_if_not_installed("sf")
       expect_equal(
         design_geom_type(sf_point),
         "tst::expect_geom_type(\nsf_point,\n\"POINT\"\n)"

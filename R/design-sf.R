@@ -1,6 +1,7 @@
 #' Print an \R{} sf object test result
 #'
 #' @inheritParams design
+#' @inheritDotParams seal -test
 #' @name design-sf
 NULL
 

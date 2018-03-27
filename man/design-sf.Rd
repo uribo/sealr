@@ -15,6 +15,14 @@ design_sf_dimension(x, ...)
 }
 \arguments{
 \item{x}{\R{} object}
+
+\item{...}{Arguments passed on to \code{seal}
+\describe{
+  \item{load_testthat}{include \code{library(testthat)} when \emph{TRUE}}
+  \item{clip}{If \emph{TRUE} will overwrite the system clipboard.
+When clipr is not available, The clip arguments is forcibly \emph{FALSE}.}
+  \item{ts}{include comments that timestamp?}
+}}
 }
 \description{
 Print an \R{} sf object test result
