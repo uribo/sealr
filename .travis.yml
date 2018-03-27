@@ -8,7 +8,7 @@ dist: trusty
 r:
 - oldrel
 - release
-- devel
+# - devel
 
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ppa --yes
