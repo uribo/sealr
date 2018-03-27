@@ -33,38 +33,32 @@ compound <- function(x) {
   return(e)
 }
 
+#' Catch lhs object which exclude function
+#'
+#' @noRd
 lhs_obj <- function(x) {
-
-  environment <- name <- mem <- NULL
+  environment <- name <- hash <- NULL
 
   load_envs <- search()
 
-  df_objects <- tibble::data_frame(
+  res <- tibble::data_frame(
     environment = load_envs %>%
-      purrr::map(
-        ~ rep(.x[1], times = length(ls(.x[1])))
-      ) %>%
+      purrr::map(~ rep(.x[1], times = length(ls(
+        .x[1]
+      )))) %>%
       purrr::flatten_chr(),
     name = load_envs %>%
-      purrr::map(
-        ~ ls(.x)
-      ) %>%
+      purrr::map(~ ls(.x)) %>%
       purrr::flatten_chr(),
-    mem = name %>%
-      purrr::map_chr(
-        ~ lobstr::obj_addr(get(.x))
-      ),
     class = name %>%
-      purrr::map(
-        ~ get(..1)) %>%
+      purrr::map(~ get(..1)) %>%
       purrr::map(class)
-  )
-
-  res <- df_objects %>%
-    dplyr::filter(mem == lobstr::obj_addr(x)) %>%
-  tidyr::unnest() #%>%
-  #dplyr::filter( # FIXME
-  #              name != "x")
+  ) %>%
+    tidyr::unnest() %>%
+    dplyr::filter(class != "function") %>%
+    dplyr::mutate(hash = name %>%
+                    purrr::map_chr(~ digest::digest(get(.x), algo = "sha256"))) %>%
+    dplyr::filter(hash == digest::digest(x, algo = "sha256"))
 
   if (nrow(res) == 0) {
     rlang::inform("The given object is not stored in any environment.")
