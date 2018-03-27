@@ -86,6 +86,15 @@ lhs_name <- function(x) {
   return(res)
 }
 
+#' Generate test_that desc text
+#'
+#' @noRd
+label <- function(e, desc) {
+  dplyr::if_else(is.null(desc),
+                 paste("check", get("obj", e), "statement"),
+                 desc)
+}
+
 sealing <- function(x, seal = FALSE, ...) {
   if (rlang::is_true(seal)) {
     seal(x, ...)

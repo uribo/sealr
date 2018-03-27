@@ -26,24 +26,24 @@ test_that("methods", {
     e, {
       expect_equal(
         transcribe(date_obj, desc = NULL, seal = FALSE),
-        "test_that(\"date_obj\", {expect_is(\ndate_obj,\n\"Date\"\n)})"
+        "test_that(\"check date_obj statement\", {expect_is(\ndate_obj,\n\"Date\"\n)})"
       )
       expect_equal(
         transcribe(x, seal = FALSE),
         # nolint start
-        "test_that(\"x\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x, na.rm = TRUE),\nc(1, 3)\n)})"
+        "test_that(\"check x statement\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x, na.rm = TRUE),\nc(1, 3)\n)})"
         # nolint end
       )
       expect_equal(
         transcribe(list_obj, seal = FALSE),
         # nolint start
-        "test_that(\"list_obj\", {expect_is(\nlist_obj,\n\"list\"\n)\nexpect_length(\nlist_obj,\n3L\n)\nexpect_named(\nlist_obj,\nc(\"a\", \"b\", \"\")\n)})"
+        "test_that(\"check list_obj statement\", {expect_is(\nlist_obj,\n\"list\"\n)\nexpect_length(\nlist_obj,\n3L\n)\nexpect_named(\nlist_obj,\nc(\"a\", \"b\", \"\")\n)})"
         # nolint end
       )
       expect_equal(
         transcribe(matrix_obj, seal = FALSE),
         # nolint start
-        "test_that(\"matrix_obj\", {expect_is(\nmatrix_obj,\n\"matrix\"\n)\nexpect_equal(\ndim(matrix_obj),\n1:2\n)\nexpect_equal(\ndimnames(matrix_obj),\nlist(\"row\", c(\"col1\", \"col2\"))\n)})"
+        "test_that(\"check matrix_obj statement\", {expect_is(\nmatrix_obj,\n\"matrix\"\n)\nexpect_equal(\ndim(matrix_obj),\n1:2\n)\nexpect_equal(\ndimnames(matrix_obj),\nlist(\"row\", c(\"col1\", \"col2\"))\n)})"
         # nolint end
       )
       expect_equal(
@@ -55,7 +55,7 @@ test_that("methods", {
         "test_that(\"Prove the state of the Species\", {\n  expect_is(\n    my_species,\n    \"factor\"\n  )\n  expect_length(\n    my_species,\n    150L\n  )\n  expect_equal(\n    levels(my_species),\n    c(\"setosa\", \"versicolor\", \"virginica\")\n  )\n  expect_equal(\n    nlevels(my_species),\n    3L\n  )\n})"
         # nolint end
       )
-      })
+    })
 
   skip_on_travis()
   withr::with_environment(
@@ -63,7 +63,7 @@ test_that("methods", {
       expect_equal(
         transcribe(table_obj, seal = FALSE),
         # nolint start
-        "test_that(\"table_obj\", {expect_is(\ntable_obj,\n\"table\"\n)\nexpect_equal(\ndim(table_obj),\nc(2L, 2L)\n)\nexpect_equal(\ndimnames(table_obj),\nstructure(list(c(\"A\", \"B\"), c(\"0\", \"1\")), .Names = c(\"\", \"\"))\n)})"
+        "test_that(\"check table_obj statement\", {expect_is(\ntable_obj,\n\"table\"\n)\nexpect_equal(\ndim(table_obj),\nc(2L, 2L)\n)\nexpect_equal(\ndimnames(table_obj),\nstructure(list(c(\"A\", \"B\"), c(\"0\", \"1\")), .Names = c(\"\", \"\"))\n)})"
         # nolint end
       )
     })
@@ -76,12 +76,12 @@ test_that("methods", {
   # FIXME
   expect_error(
     expect_message(
-    c(1, 3) %>% transcribe()
-  ))
+      c(1, 3) %>% transcribe()
+    ))
   expect_error(
     expect_message(
-    data.frame(a = 1) %>% transcribe()
-  ))
+      data.frame(a = 1) %>% transcribe()
+    ))
 
   expect_equal(
     transcribe(letters, seal = FALSE),
@@ -100,7 +100,7 @@ test_that("methods", {
       expect_equal(
         x %>% transcribe(seal = FALSE),
         # nolint start
-        "test_that(\"x\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x, na.rm = TRUE),\nc(1, 3)\n)})"
+        "test_that(\"check x statement\", {expect_is(\nx,\n\"numeric\"\n)\nexpect_length(\nx,\n2L\n)\nexpect_equal(\nunique(x),\nc(1, 3)\n)\nexpect_equal(\nrange(x, na.rm = TRUE),\nc(1, 3)\n)})"
         # nolint end
       )
     })
@@ -108,7 +108,7 @@ test_that("methods", {
   expect_equal(
     transcribe(iris, seal = FALSE),
     # nolint start
-    "test_that(\"iris\", {expect_is(\niris,\n\"data.frame\"\n)\nexpect_equal(\ndim(iris),\nc(150L, 5L)\n)\nexpect_named(\niris,\nc(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\", \n\"Species\")\n)\nexpect_equal(\niris %>% purrr::map(class) %>% unname(),\nlist(\"numeric\", \"numeric\", \"numeric\", \"numeric\", \"factor\")\n)})"
+    "test_that(\"check iris statement\", {expect_is(\niris,\n\"data.frame\"\n)\nexpect_equal(\ndim(iris),\nc(150L, 5L)\n)\nexpect_named(\niris,\nc(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\", \n\"Species\")\n)\nexpect_equal(\niris %>% purrr::map(class) %>% unname(),\nlist(\"numeric\", \"numeric\", \"numeric\", \"numeric\", \"factor\")\n)})"
     # nolint end
   )
 
@@ -118,7 +118,7 @@ test_that("methods", {
       expect_equal(
         transcribe(band_members, seal = FALSE),
         # nolint start
-        "test_that(\"band_members\", {expect_is(\nband_members,\nc(\"tbl_df\", \"tbl\", \"data.frame\")\n)\nexpect_equal(\ndim(band_members),\nc(3L, 2L)\n)\nexpect_named(\nband_members,\nc(\"name\", \"band\")\n)\nexpect_equal(\nband_members %>% purrr::map(class) %>% unname(),\nlist(\"character\", \"character\")\n)})"
+        "test_that(\"check band_members statement\", {expect_is(\nband_members,\nc(\"tbl_df\", \"tbl\", \"data.frame\")\n)\nexpect_equal(\ndim(band_members),\nc(3L, 2L)\n)\nexpect_named(\nband_members,\nc(\"name\", \"band\")\n)\nexpect_equal(\nband_members %>% purrr::map(class) %>% unname(),\nlist(\"character\", \"character\")\n)})"
         # nolint end
       )
     }

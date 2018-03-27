@@ -23,7 +23,7 @@ transcribe.default <- function(x, desc = NULL, seal = TRUE, ...) {
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      dplyr::if_else(is.null(desc), get("obj", e), desc),
+      label(e, desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -42,7 +42,7 @@ transcribe.numeric <- function(x, desc = NULL, seal = TRUE, ...) {
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      dplyr::if_else(is.null(desc), get("obj", e), desc),
+      label(e, desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -80,7 +80,7 @@ transcribe.character <- function(x, desc = NULL, seal = TRUE, ...) {
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      dplyr::if_else(is.null(desc), get("obj", e), desc),
+      label(e, desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -118,7 +118,7 @@ transcribe.factor <- function(x, desc = NULL, seal = TRUE, ...) {
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      dplyr::if_else(is.null(desc), get("obj", e), desc),
+      label(e, desc),
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
@@ -154,7 +154,7 @@ transcribe.list <- function(x, desc = NULL, seal = TRUE, ...) {
 
   rlang::expr_interp(paste0(
     "test_that(\"",
-    dplyr::if_else(is.null(desc), get("obj", e), desc),
+    label(e, desc),
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
@@ -182,7 +182,7 @@ transcribe.matrix <- function(x, desc = NULL, seal = TRUE, ...) {
 
   rlang::expr_interp(paste0(
     "test_that(\"",
-    dplyr::if_else(is.null(desc), get("obj", e), desc),
+    label(e, desc),
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
@@ -211,7 +211,7 @@ transcribe.table <- function(x, desc = NULL, seal = TRUE, ...) {
 
   rlang::expr_interp(paste0(
     "test_that(\"",
-    dplyr::if_else(is.null(desc), get("obj", e), desc),
+    label(e, desc),
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
@@ -241,7 +241,7 @@ transcribe.data.frame <- function(x, desc = NULL, seal = TRUE, ...) {
   rlang::expr_interp(
     paste0(
       "test_that(\"",
-      dplyr::if_else(is.null(desc), get("obj", e), desc),
+      label(e, desc),
       '", {',
       glue::evaluate(glue::glue("design_class({x})",
                                 x = get("obj", e)),
