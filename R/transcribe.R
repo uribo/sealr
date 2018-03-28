@@ -17,6 +17,7 @@ transcribe <- function(x, desc = NULL, seal = TRUE, ...) {
   UseMethod("transcribe")
 }
 
+#' @export
 transcribe.default <- function(x, desc = NULL, seal = TRUE, ...) {
   e <- compound(x)
 

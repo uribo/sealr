@@ -3,6 +3,12 @@
 \name{compound}
 \alias{compound}
 \title{Storage R object to a temporary environment}
+\usage{
+compound(x)
+}
+\arguments{
+\item{x}{\R{} object}
+}
 \description{
 Storage R object to a temporary environment
 }

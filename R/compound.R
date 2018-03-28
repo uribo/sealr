@@ -10,8 +10,6 @@
 #' x %>% compound()
 #' }
 #' @name compound
-NULL
-
 compound <- function(x) {
   UseMethod("compound")
 }

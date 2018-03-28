@@ -2,30 +2,24 @@
 % Please edit documentation in R/catch_vars.R
 \name{catch_vars}
 \alias{catch_vars}
-\alias{store_to_env}
 \alias{catch_varnames}
 \alias{catch_varname}
-\title{catch up data.frame variable names and value}
+\title{Catch-up data frame variable names and value}
 \usage{
-store_to_env(x)
+catch_varnames(data)
 
-catch_varnames(x)
-
-catch_varname(x, variable)
+catch_varname(data, variable)
 }
 \arguments{
-\item{x}{\R{} object}
+\item{data}{A data frame.}
 
-\item{variable}{target data.frame's column name (\code{character})}
+\item{variable}{target data frame's column name (\code{character})}
 }
 \description{
-catch up data.frame variable names and value
+Catch-up data frame variable names and value
 }
 \examples{
 \dontrun{
-# Storage R object to a temporary environment
-store_to_env(iris)
-
 catch_varnames(mtcars)
 
 # Evaluate
