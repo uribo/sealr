@@ -27,7 +27,7 @@ transcribe.default <- function(x, desc = NULL, seal = TRUE, ...) {
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "})"
@@ -46,25 +46,25 @@ transcribe.numeric <- function(x, desc = NULL, seal = TRUE, ...) {
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_length({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_unique({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_range({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "})"
@@ -84,25 +84,25 @@ transcribe.character <- function(x, desc = NULL, seal = TRUE, ...) {
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_length({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_unique({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_range({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "})"
@@ -122,25 +122,25 @@ transcribe.factor <- function(x, desc = NULL, seal = TRUE, ...) {
       '", {',
       glue::evaluate(glue::glue(
         "design_class({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_length({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_levels({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "\n",
       glue::evaluate(glue::glue(
         "design_nlevels({x})",
-        x = get("obj", e)
+        x = get(".obj", e)
       ),
       envir = e),
       "})"
@@ -158,18 +158,18 @@ transcribe.list <- function(x, desc = NULL, seal = TRUE, ...) {
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
-      x = get("obj", e)
+      x = get(".obj", e)
       ),
       envir = e),
     "\n",
     glue::evaluate(glue::glue(
       "design_length({x})",
-      x = get("obj", e)
+      x = get(".obj", e)
     ),
     envir = e),
     "\n",
     glue::evaluate(glue::glue("design_names({x})",
-                              x = get("obj", e)),
+                              x = get(".obj", e)),
                    envir = e),
     "})"
   )) %>%
@@ -186,19 +186,19 @@ transcribe.matrix <- function(x, desc = NULL, seal = TRUE, ...) {
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
-      x = get("obj", e)
+      x = get(".obj", e)
     ),
     envir = e),
     "\n",
     glue::evaluate(glue::glue(
       "design_dim({x})",
-      x = get("obj", e)
+      x = get(".obj", e)
     ),
     envir = e),
     "\n",
     glue::evaluate(
       glue::glue("design_dimnames({x})",
-                 x = get("obj", e)),
+                 x = get(".obj", e)),
       envir = e),
     "})"
   )) %>%
@@ -215,19 +215,19 @@ transcribe.table <- function(x, desc = NULL, seal = TRUE, ...) {
     '", {',
     glue::evaluate(glue::glue(
       "design_class({x})",
-      x = get("obj", e)
+      x = get(".obj", e)
     ),
     envir = e),
     "\n",
     glue::evaluate(glue::glue(
       "design_dim({x})",
-      x = get("obj", e)
+      x = get(".obj", e)
     ),
     envir = e),
     "\n",
     glue::evaluate(
       glue::glue("design_dimnames({x})",
-                 x = get("obj", e)),
+                 x = get(".obj", e)),
       envir = e),
     "})"
   )) %>%
@@ -244,19 +244,19 @@ transcribe.data.frame <- function(x, desc = NULL, seal = TRUE, ...) {
       label(e, desc),
       '", {',
       glue::evaluate(glue::glue("design_class({x})",
-                                x = get("obj", e)),
+                                x = get(".obj", e)),
                      envir = e),
       "\n",
       glue::evaluate(glue::glue("design_dim({x})",
-                                x = get("obj", e)),
+                                x = get(".obj", e)),
                      envir = e),
       "\n",
       glue::evaluate(glue::glue("design_names({x})",
-                                x = get("obj", e)),
+                                x = get(".obj", e)),
                      envir = e),
       "\n",
       glue::evaluate(glue::glue("design_varclass({x})",
-                                x = get("obj", e)),
+                                x = get(".obj", e)),
                      envir = e),
       "})"
     )
