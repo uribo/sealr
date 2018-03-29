@@ -2,6 +2,7 @@
 
 S3method(transcribe,character)
 S3method(transcribe,data.frame)
+S3method(transcribe,default)
 S3method(transcribe,factor)
 S3method(transcribe,list)
 S3method(transcribe,matrix)

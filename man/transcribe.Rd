@@ -4,7 +4,7 @@
 \alias{transcribe}
 \title{Transcribe \R{} object assert conditions}
 \usage{
-transcribe(x, desc = NULL, seal = TRUE, ...)
+transcribe(x, desc = NULL, seal = TRUE, detail = FALSE, ...)
 }
 \arguments{
 \item{x}{\R{} object}
@@ -12,6 +12,9 @@ transcribe(x, desc = NULL, seal = TRUE, ...)
 \item{desc}{test name. Default adopt object name.}
 
 \item{seal}{which output testthat script}
+
+\item{detail}{\code{Logical}. Only data frame.
+If you chose \emph{TRUE}, to make a detailed record for each variables in data frame.}
 
 \item{...}{Arguments passed on to \code{seal}
 \describe{

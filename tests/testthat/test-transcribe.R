@@ -125,3 +125,50 @@ test_that("methods", {
   )
 
 })
+
+test_that("Operator Access", {
+  expect_equal(
+    .design_df_details("iris$Species"),
+    "expect_equal(\n    sum(is.na(iris$Species)),\n0L)\nexpect_equal(\n      iris$Species,\nc(\"setosa\", \"versicolor\", \"virginica\"))" # nolint
+  )
+  expect_identical(
+    "mtcars$mpg" %>% .design_df_details(),
+    .design_df_details("mtcars$mpg")
+  )
+  expect_error(
+    .design_df_details(iris$Species)
+  )
+  .design_df_details("letters")
+
+  e <- new.env()
+  df <- data.frame(x = c(Sys.Date(), NA))
+  assign("df", df, e)
+  withr::with_environment(
+    e, {
+      expect_equal(
+        .design_df_details("df$x"),
+        "expect_equal(\n    sum(is.na(df$x)),\n1L)\nexpect_equal(\n      df$x,\n2L)"
+      )
+    })
+})
+
+test_that("Test for data frame variables", {
+  e <- new.env()
+  df <- data.frame(x = letters)
+  assign("df", df, e)
+  withr::with_environment(
+    e, {
+      expect_equal(
+        transcribe(df, desc = "for test", seal = FALSE, clip = FALSE, ts = FALSE, detail = TRUE),
+        "test_that(\"for test\", {expect_is(\ndf,\n\"data.frame\"\n)\nexpect_equal(\ndim(df),\nc(26L, 1L)\n)\nexpect_named(\ndf,\n\"x\"\n)\nexpect_equal(\ndf %>% purrr::map(class) %>% unname(),\nlist(\"factor\")\n)\nexpect_equal(\n    sum(is.na(df$x)),\n0L)\nexpect_equal(\n      df$x,\nc(\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\", \"k\", \"l\", \n\"m\", \"n\", \"o\", \"p\", \"q\", \"r\", \"s\", \"t\", \"u\", \"v\", \"w\", \"x\", \"y\", \n\"z\"))})" # nolint
+      )})
+  expect_equal(
+    capture_output({
+      transcribe(iris, seal = TRUE, clip = FALSE, ts = FALSE, detail = TRUE)
+    },
+    print = TRUE, width = 80),
+    # nolint start
+    "test_that(\"check iris statement\", {\n  expect_is(\n    iris,\n    \"data.frame\"\n  )\n  expect_equal(\n    dim(iris),\n    c(150L, 5L)\n  )\n  expect_named(\n    iris,\n    c(\n      \"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\",\n      \"Species\"\n    )\n  )\n  expect_equal(\n    iris %>% purrr::map(class) %>% unname(),\n    list(\"numeric\", \"numeric\", \"numeric\", \"numeric\", \"factor\")\n  )\n  expect_equal(\n    sum(is.na(iris$Petal.Length)),\n    0L\n  )\n  expect_equal(\n    range(iris$Petal.Length, na.rm = TRUE),\n    c(1, 6.9)\n  )\n  expect_equal(\n    sum(is.na(iris$Petal.Width)),\n    0L\n  )\n  expect_equal(\n    range(iris$Petal.Width, na.rm = TRUE),\n    c(0.1, 2.5)\n  )\n  expect_equal(\n    sum(is.na(iris$Sepal.Length)),\n    0L\n  )\n  expect_equal(\n    range(iris$Sepal.Length, na.rm = TRUE),\n    c(4.3, 7.9)\n  )\n  expect_equal(\n    sum(is.na(iris$Sepal.Width)),\n    0L\n  )\n  expect_equal(\n    range(iris$Sepal.Width, na.rm = TRUE),\n    c(2, 4.4)\n  )\n  expect_equal(\n    sum(is.na(iris$Species)),\n    0L\n  )\n  expect_equal(\n    iris$Species,\n    c(\"setosa\", \"versicolor\", \"virginica\")\n  )\n})"
+    # nolint end
+  )
+})

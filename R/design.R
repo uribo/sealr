@@ -17,7 +17,7 @@ design_length <- function(x, ...) {
     glue::glue("expect_length(
                {x},
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(length(x)),
     "\n)"
   )) %>%
@@ -37,7 +37,7 @@ design_range <- function(x, ...) {
     glue::glue("expect_equal(
                range({x}, na.rm = TRUE),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(range(x, na.rm = TRUE)),
     "\n)"
   )) %>%
@@ -55,7 +55,7 @@ design_dim <- function(x, ...) {
     glue::glue("expect_equal(
                dim({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(dim(x)),
     "\n)"
   )) %>%
@@ -76,7 +76,7 @@ design_unique <- function(x, ...) {
     glue::glue("expect_equal(
                unique({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(unique(x)),
     "\n)"
   )) %>%
@@ -96,7 +96,7 @@ design_missings <- function(x, ...) {
     glue::glue("expect_equal(
                sum(is.na({x})),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(sum(is.na(x))),
     "\n)"
   )) %>%
@@ -116,7 +116,7 @@ design_levels <- function(x, ...) {
     glue::glue("expect_equal(\n
                levels({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(levels(x)),
     "\n)"
   )) %>%
@@ -136,7 +136,7 @@ design_nlevels <- function(x, ...) {
     glue::glue("expect_equal(\n
                nlevels({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(nlevels(x)),
     "\n)"
   )) %>%
@@ -154,7 +154,7 @@ design_nrow <- function(x, ...) {
     glue::glue("expect_equal(
                nrow({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(nrow(x)),
     "\n)"
   )) %>%
@@ -172,7 +172,7 @@ design_ncol <- function(x, ...) {
     glue::glue("expect_equal(
                ncol({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(ncol(x)),
     "\n)"
   )) %>%
@@ -190,7 +190,7 @@ design_names <- function(x, ...) {
     glue::glue("expect_named(
                {x},
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(names(x)),
     "\n)"
   )) %>%
@@ -206,7 +206,7 @@ design_dimnames <- function(x, ...) {
     glue::glue("expect_equal(
                dimnames({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(dimnames(x)),
     "\n)"
   )) %>%
@@ -225,7 +225,7 @@ design_varclass <- function(x, ...) {
       "expect_equal(
       {x} %>% purrr::map(class) %>% unname(),
       \n",
-      x = get("obj", e)
+      x = get(".obj", e)
     ),
     rlang::expr_text(x %>%
                        purrr::map(class) %>%
@@ -250,13 +250,13 @@ design_class <- function(x, environment = NULL, ...) {
   }
 
   if (isS4(glue::evaluate(glue::glue("{x}",
-                                     x = get("obj", e)),
+                                     x = get(".obj", e)),
                           envir = env)) == TRUE) {
     res <- as.character(glue::glue(
       glue::glue("expect_s4_class(
                  {x},
                  \n",
-                 x = get("obj", e)),
+                 x = get(".obj", e)),
       rlang::expr_text(class(x)),
       "\n)"
     ))
@@ -266,7 +266,7 @@ design_class <- function(x, environment = NULL, ...) {
       glue::glue("expect_is(
                  {x},
                  \n",
-                 x = get("obj", e)),
+                 x = get(".obj", e)),
       rlang::expr_text(class(x)),
       "\n)"
     ))
@@ -290,9 +290,71 @@ design_obj_size <- function(x, ...) {
     glue::glue("expect_equal(
                lobstr::obj_size({x}),
                \n",
-               x = get("obj", e)),
+               x = get(".obj", e)),
     rlang::expr_text(lobstr::obj_size(x)),
     "\n)"
   )) %>%
     sealing(...)
+}
+
+#' @noRd
+.design_df_details <- function(var) {
+
+  obj <- glue::evaluate(var, .GlobalEnv)
+
+  test_common <- glue::glue(
+    "expect_equal(
+    sum(is.na({x})),\n",
+    rlang::expr_text(
+      sum(is.na(
+        glue::evaluate(var, .GlobalEnv)))),
+    ")",
+    x = rlang::sym(var)
+  )
+
+  test_specific <- if (is.numeric(obj)) {
+    glue::glue(
+      "expect_equal(
+      range({x}, na.rm = TRUE),\n",
+      rlang::expr_text(
+        range(
+          glue::evaluate(var, .GlobalEnv), na.rm = TRUE)),
+      ")",
+      x = rlang::sym(var)
+    )
+  } else if (is.factor(obj)) {
+    glue::glue(
+      "expect_equal(
+      {x},\n",
+      rlang::expr_text(
+        levels(
+          glue::evaluate(var, .GlobalEnv))),
+      ")",
+      x = rlang::sym(var)
+    )
+  } else if (is.character(obj)) {
+    glue::glue(
+      "expect_equal(
+      length(unique({x})),\n",
+      rlang::expr_text(
+        length(unique(
+          glue::evaluate(var, .GlobalEnv)))),
+      ")",
+      x = rlang::sym(var)
+    )
+  } else {
+    glue::glue(
+      "expect_equal(
+      {x},\n",
+      rlang::expr_text(
+        length(
+          glue::evaluate(var, .GlobalEnv))),
+      ")",
+      x = rlang::sym(var)
+    )
+  }
+
+  paste(test_common,
+        test_specific,
+        sep = "\n")
 }

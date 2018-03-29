@@ -22,17 +22,6 @@ obj_eval <- function(df) {
     )
 }
 
-compound <- function(x) {
-  e <- new.env()
-
-  e$obj <- unique(lhs_name(get("x", environment())))
-
-  if (length(e$obj) == 0) {
-    e$obj <- deparse(as.list(match.call())$x)
-  }
-  return(e)
-}
-
 #' Catch lhs object which exclude function
 #'
 #' @noRd
@@ -85,7 +74,7 @@ lhs_name <- function(x) {
 #' @noRd
 label <- function(e, desc) {
   dplyr::if_else(is.null(desc),
-                 paste("check", get("obj", e), "statement"),
+                 paste("check", get(".obj", e), "statement"),
                  desc)
 }
 
