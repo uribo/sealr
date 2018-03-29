@@ -296,3 +296,65 @@ design_obj_size <- function(x, ...) {
   )) %>%
     sealing(...)
 }
+
+#' @noRd
+.design_df_details <- function(var) {
+
+  obj <- glue::evaluate(var, .GlobalEnv)
+
+  test_common <- glue::glue(
+    "expect_equal(
+    sum(is.na({x})),\n",
+    rlang::expr_text(
+      sum(is.na(
+        glue::evaluate(var, .GlobalEnv)))),
+    ")",
+    x = rlang::sym(var)
+  )
+
+  test_specific <- if (is.numeric(obj)) {
+    glue::glue(
+      "expect_equal(
+      range({x}, na.rm = TRUE),\n",
+      rlang::expr_text(
+        range(
+          glue::evaluate(var, .GlobalEnv), na.rm = TRUE)),
+      ")",
+      x = rlang::sym(var)
+    )
+  } else if (is.factor(obj)) {
+    glue::glue(
+      "expect_equal(
+      {x},\n",
+      rlang::expr_text(
+        levels(
+          glue::evaluate(var, .GlobalEnv))),
+      ")",
+      x = rlang::sym(var)
+    )
+  } else if (is.character(obj)) {
+    glue::glue(
+      "expect_equal(
+      length(unique({x})),\n",
+      rlang::expr_text(
+        length(unique(
+          glue::evaluate(var, .GlobalEnv)))),
+      ")",
+      x = rlang::sym(var)
+    )
+  } else {
+    glue::glue(
+      "expect_equal(
+      {x},\n",
+      rlang::expr_text(
+        length(
+          glue::evaluate(var, .GlobalEnv))),
+      ")",
+      x = rlang::sym(var)
+    )
+  }
+
+  paste(test_common,
+        test_specific,
+        sep = "\n")
+}
