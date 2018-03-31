@@ -18,6 +18,8 @@ test_that("control transcript behavior functions", {
     design_ncol(mtcars),
     "expect_equal(\nncol(mtcars),\n11L\n)"
   )
+
+  skip_on_cran()
   expect_match(
     capture_output({
       design_ncol(mtcars, seal = TRUE,

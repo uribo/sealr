@@ -54,5 +54,7 @@ put <- function(all = FALSE) {
 
 #' @noRd
 put_all <- function() {
+  # nocov start
   put(all = TRUE)
+  # nocov end
 }

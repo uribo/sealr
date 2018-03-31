@@ -58,7 +58,7 @@ test_that("methods", {
     })
 
   skip_on_travis()
-  skip_on_os("windows")
+  skip_on_cran()
   withr::with_environment(
     e, {
       expect_equal(
@@ -114,7 +114,7 @@ test_that("methods", {
   )
 
   skip_if_not_installed("dplyr")
-  skip_on_os("windows")
+  skip_on_cran()
   withr::with_package(
     "dplyr", {
       expect_equal(
