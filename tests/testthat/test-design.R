@@ -24,7 +24,7 @@ test_that("control transcript behavior functions", {
                    load_testthat = FALSE, ts = TRUE, clip = FALSE)
     },
     print = TRUE, width = 80),
-    "#' ℹ: Labeling on ."
+    ". Labeling on ."
   )
 
   # Fixed #2
