@@ -5,7 +5,14 @@ sealr <img src="man/figures/logo.png" align="right" width="120px" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/sealr)](https://cran.r-project.org/package=sealr) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/uribo/sealr.svg?branch=master)](https://travis-ci.org/uribo/sealr) [![Coverage status](https://codecov.io/gh/uribo/sealr/branch/master/graph/badge.svg)](https://codecov.io/github/uribo/sealr?branch=master)
 
-The goal of sealr is to reduce the burden of writing unit tests and assertion that record the state of objects. Applying a function of sealr (`design_*()` or `transcribe()`) to the target object outputs the test code that record the current state.
+Motivation
+----------
+
+Data is not always what you think. Someone may change a single value or the data type may be different depending on the specification the API. We need to be aware of these data changes as soon as possible (*It is hard to review from the final result!*).
+
+You can use tests and asserts to check data behavior. Although the testthat package is originally used for unit test of R package, this framework is wide and applicable to any *R* object. On the other hand, it is time-consuming task to enter the state of existing objects, and there is a possibility of mistakes as well.
+
+The goal of **sealr** is to reduce the burden of writing unit tests and assertion that record the state of objects. Applying a function of sealr to the target object outputs the test code that record the current state.
 
 Installation
 ------------
@@ -20,32 +27,50 @@ devtools::install_github("uribo/sealr")
 How to use
 ----------
 
+1.  (As usual) Create an *R* object.
+2.  Execute the function of sealr (`design_*()` or `transcribe()`) against a object whose state is to be record.
+    -   `design_*()`... The preamble is fixed and consists of the function name bearing test items (eg. `design_class()`, `design_length()`, etc.).
+    -   `transcribe()`... Sets of `design_*()`.It is a generic function and returns combinations according to the class of the object.
+
 ``` r
 library(sealr)
+library(testthat)
 ```
 
 ``` r
 x <- seq(1, 9, by = 2)
 
 design_class(x, seal = TRUE)
-#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
+#> #' ℹ: Labeling on 2018-04-01 by the sealr package (v0.0.0.9000)
 #> expect_is(
 #>   x,
 #>   "numeric"
 #> )
 
 design_range(x, seal = TRUE)
-#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
+#> #' ℹ: Labeling on 2018-04-01 by the sealr package (v0.0.0.9000)
 #> expect_equal(
 #>   range(x, na.rm = TRUE),
 #>   c(1, 9)
 #> )
 ```
 
+You can copy the output, but if you activate the *clip* argument, the output result will be in a copied state, pasting that value is too easy. This feature depends on the [clipr](https://github.com/mdlincoln/clipr) package.
+
+``` r
+design_class(x, seal = TRUE, clip = TRUE)
+expect_is(
+  x,
+  "numeric"
+)
+```
+
+`transcribe()` is a generic function that produces output according to the class of the object. Currently it suports to 8 classes, but we plan to add various classes in future upgrades.
+
 ``` r
 transcribe(iris)
-#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
-#> test_that("iris", {
+#> #' ℹ: Labeling on 2018-04-01 by the sealr package (v0.0.0.9000)
+#> test_that("check iris statement", {
 #>   expect_is(
 #>     iris,
 #>     "data.frame"
@@ -62,48 +87,40 @@ transcribe(iris)
 #>     )
 #>   )
 #>   expect_equal(
-#>     iris %>% purrr::map_chr(class) %>% unname(),
-#>     c("numeric", "numeric", "numeric", "numeric", "factor")
+#>     iris %>% purrr::map(class) %>% unname(),
+#>     list("numeric", "numeric", "numeric", "numeric", "factor")
 #>   )
 #> })
 
-transcribe(mtcars, load_testthat = FALSE, ts = FALSE)
-#> test_that("mtcars", {
+my_data <- list(A = letters, B = trees)
+
+transcribe(my_data, load_testthat = FALSE, ts = FALSE)
+#> test_that("check my_data statement", {
 #>   expect_is(
-#>     mtcars,
-#>     "data.frame"
+#>     my_data,
+#>     "list"
 #>   )
-#>   expect_equal(
-#>     dim(mtcars),
-#>     c(32L, 11L)
+#>   expect_length(
+#>     my_data,
+#>     2L
 #>   )
 #>   expect_named(
-#>     mtcars,
-#>     c(
-#>       "mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "am",
-#>       "gear", "carb"
-#>     )
-#>   )
-#>   expect_equal(
-#>     mtcars %>% purrr::map_chr(class) %>% unname(),
-#>     c(
-#>       "numeric", "numeric", "numeric", "numeric", "numeric", "numeric",
-#>       "numeric", "numeric", "numeric", "numeric", "numeric"
-#>     )
+#>     my_data,
+#>     c("A", "B")
 #>   )
 #> })
 ```
 
-### APIs
+To get started, please read our [introduce vignette](vignettes/sealr1.Rmd).
 
--   `design_*()`
--   `transcribe()`
+Related projects on the test and assertion
+------------------------------------------
 
-| Object Type  | Class | Size | Name |
-|--------------|-------|------|------|
-| `vector`     | Y     | Y    | N    |
-| `data.frame` | Y     | Y    | Y    |
-| ...          | -     | -    | -    |
+-   [assertr](https://github.com/ropensci/assertr)
+-   [checkmate](https://github.com/mllg/checkmate)
+-   [checkr](https://github.com/poissonconsulting/checkr)
+-   [validate](https://github.com/data-cleaning/validate)
+-   [ruler](https://github.com/echasnovski/ruler)
 
 Code of Conduct
 ---------------
