@@ -15,7 +15,6 @@
 \alias{design_dimnames}
 \alias{design_varclass}
 \alias{design_class}
-\alias{design_obj_size}
 \title{Print an \R{} object test result}
 \usage{
 design_length(x, ...)
@@ -43,8 +42,6 @@ design_dimnames(x, ...)
 design_varclass(x, ...)
 
 design_class(x, environment = NULL, ...)
-
-design_obj_size(x, ...)
 }
 \arguments{
 \item{x}{\R{} object}
@@ -89,9 +86,4 @@ design_names(iris)
 design_varclass(iris)
 design_class(letters)
 design_class(iris)
-design_obj_size(iris,
-                seal = TRUE,
-                load_testthat = TRUE,
-                clip = FALSE)
-design_obj_size(letters)
 }

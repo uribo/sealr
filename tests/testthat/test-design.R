@@ -77,23 +77,7 @@ test_that("control transcript behavior functions", {
     )
   )
 
-  expect_equal(
-    design_obj_size(iris),
-    "expect_equal(\nlobstr::obj_size(iris),\nstructure(7032, class = \"lobstr_bytes\")\n)" # nolint
-  )
-
   e <- new.env()
-  my_data <- data.frame(A = letters)
-  assign("my_data", my_data, e)
-  withr::with_environment(
-    e, {
-      expect_equal(
-        design_obj_size(my_data),
-        "expect_equal(\nlobstr::obj_size(my_data),\nstructure(2560, class = \"lobstr_bytes\")\n)"
-      )
-    }
-  )
-
   iris_s4 <- asS4(iris)
   assign("iris_s4", iris_s4, e)
   withr::with_environment(

@@ -274,29 +274,6 @@ design_class <- function(x, environment = NULL, ...) {
   sealing(res, ...)
 }
 
-#' @rdname design
-#' @examples
-#' design_obj_size(iris,
-#'                 seal = TRUE,
-#'                 load_testthat = TRUE,
-#'                 clip = FALSE)
-#' design_obj_size(letters)
-#' @export
-design_obj_size <- function(x, ...) {
-
-  e <- compound(x)
-
-  as.character(glue::glue(
-    glue::glue("expect_equal(
-               lobstr::obj_size({x}),
-               \n",
-               x = get(".obj", e)),
-    rlang::expr_text(lobstr::obj_size(x)),
-    "\n)"
-  )) %>%
-    sealing(...)
-}
-
 #' @noRd
 .design_df_details <- function(var) {
 

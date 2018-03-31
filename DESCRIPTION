@@ -15,10 +15,9 @@ Depends:
 Imports: 
     clipr (>= 0.4.0),
     clisymbols (>= 1.2.0),
-    digest,
+    digest (>= 0.6.15),
     dplyr (>= 0.7.4),
     glue (>= 1.2.0),
-    lobstr,
     magrittr (>= 1.5),
     purrr (>= 0.2.4),
     rlang (>= 0.2.0),
@@ -29,11 +28,9 @@ Imports:
 Suggests: 
     covr (>= 3.0.1),
     testthat (>= 2.0.0)
-Remotes:
-    r-lib/lobstr
 ByteCompile: true
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
-Language: en-US

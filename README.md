@@ -7,16 +7,6 @@ sealr <img src="man/figures/logo.png" align="right" width="120px" />
 
 The goal of sealr is to reduce the burden of writing unit tests and assertion that record the state of objects. Applying a function of sealr (`design_*()` or `transcribe()`) to the target object outputs the test code that record the current state.
 
-Installation
-------------
-
-**sealr** is not available on CRAN. So, install from GitHub.
-
-``` r
-install.packages("devtools")
-devtools::install_github("uribo/sealr")
-```
-
 How to use
 ----------
 
@@ -28,14 +18,16 @@ library(sealr)
 x <- seq(1, 9, by = 2)
 
 design_class(x, seal = TRUE)
-#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
+#> Warning: clipr not available. check clipr configuration.
+#> #' ℹ: Labeling on 2018-03-31 by the sealr package (v0.1.0)
 #> expect_is(
 #>   x,
 #>   "numeric"
 #> )
 
 design_range(x, seal = TRUE)
-#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
+#> Warning: clipr not available. check clipr configuration.
+#> #' ℹ: Labeling on 2018-03-31 by the sealr package (v0.1.0)
 #> expect_equal(
 #>   range(x, na.rm = TRUE),
 #>   c(1, 9)
@@ -44,8 +36,8 @@ design_range(x, seal = TRUE)
 
 ``` r
 transcribe(iris)
-#> #' ℹ: Labeling on 2018-03-23 by the sealr package (v0.0.0.9000)
-#> test_that("iris", {
+#> #' ℹ: Labeling on 2018-03-31 by the sealr package (v0.1.0)
+#> test_that("check iris statement", {
 #>   expect_is(
 #>     iris,
 #>     "data.frame"
@@ -62,13 +54,13 @@ transcribe(iris)
 #>     )
 #>   )
 #>   expect_equal(
-#>     iris %>% purrr::map_chr(class) %>% unname(),
-#>     c("numeric", "numeric", "numeric", "numeric", "factor")
+#>     iris %>% purrr::map(class) %>% unname(),
+#>     list("numeric", "numeric", "numeric", "numeric", "factor")
 #>   )
 #> })
 
 transcribe(mtcars, load_testthat = FALSE, ts = FALSE)
-#> test_that("mtcars", {
+#> test_that("check mtcars statement", {
 #>   expect_is(
 #>     mtcars,
 #>     "data.frame"
@@ -85,8 +77,8 @@ transcribe(mtcars, load_testthat = FALSE, ts = FALSE)
 #>     )
 #>   )
 #>   expect_equal(
-#>     mtcars %>% purrr::map_chr(class) %>% unname(),
-#>     c(
+#>     mtcars %>% purrr::map(class) %>% unname(),
+#>     list(
 #>       "numeric", "numeric", "numeric", "numeric", "numeric", "numeric",
 #>       "numeric", "numeric", "numeric", "numeric", "numeric"
 #>     )
@@ -98,12 +90,6 @@ transcribe(mtcars, load_testthat = FALSE, ts = FALSE)
 
 -   `design_*()`
 -   `transcribe()`
-
-| Object Type  | Class | Size | Name |
-|--------------|-------|------|------|
-| `vector`     | Y     | Y    | N    |
-| `data.frame` | Y     | Y    | Y    |
-| ...          | -     | -    | -    |
 
 Code of Conduct
 ---------------
