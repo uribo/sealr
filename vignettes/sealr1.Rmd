@@ -1,20 +1,23 @@
 ---
-output: github_document
+title: "1. Sealing the R Objects Test and Assert Conditions"
+author: "Shinya Uryu"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{1. Sealing the R Objects Test and Assert Conditions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = "#>"
 )
 ```
-# sealr <img src="man/figures/logo.png" align="right" width="120px" />
-
-[![CRAN status](https://www.r-pkg.org/badges/version/sealr)](https://cran.r-project.org/package=sealr) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/uribo/sealr.svg?branch=master)](https://travis-ci.org/uribo/sealr) [![Coverage status](https://codecov.io/gh/uribo/sealr/branch/master/graph/badge.svg)](https://codecov.io/github/uribo/sealr?branch=master)
 
 ## Motivation
 
@@ -64,18 +67,33 @@ my_data <- list(A = letters, B = trees)
 transcribe(my_data, load_testthat = FALSE, ts = FALSE)
 ```
 
-To get started, please read our [introduce vignette](vignettes/sealr1.Rmd).
+## Details
 
-## Related projects on the test and assertion
+### Options
 
-- [assertr](https://github.com/ropensci/assertr)
-- [checkmate](https://github.com/mllg/checkmate)
-- [checkr](https://github.com/poissonconsulting/checkr)
-- [validate](https://github.com/data-cleaning/validate)
-- [ruler](https://github.com/echasnovski/ruler)
+Both `design_*()` and `transcribe()` have the following common arguments (Ref. `?seal`).
 
-## Code of Conduct
+- load_testthat: include `library(testthat)` when *TRUE*
+- clip: If *TRUE* will overwrite the system clipboard. When clipr is not available, The clip arguments is forcibly *FALSE*.
+- ts: include comments that timestamp?
+- mask_seal: Whether to comment out after executing the function. Default FALSE. This option is effective only when using RStudio.
 
-Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
+### APIs
 
-By participating in this project you agree to abide by its terms.
+#### design_* function
+
+- `design_class()`
+- `design_length()`
+
+#### transcribe function
+
+Suports to 8 classes. Default test of the class. 
+
+- numeric
+- character
+- factor
+- Date
+- data.frame
+- list
+- matrix
+- table
