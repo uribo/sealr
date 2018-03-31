@@ -9,7 +9,7 @@ test_that("control transcript behavior functions", {
   expect_equal(
     capture_output({
       design_nrow(mtcars, seal = TRUE,
-                  load_testthat = TRUE, ts = FALSE, clip = FALSE)
+                  load_testthat = TRUE, ts = FALSE, clip = FALSE, mask_seal = FALSE)
     },
     print = TRUE, width = 80),
     "library(testthat)\nexpect_equal(\n  nrow(mtcars),\n  32L\n)"
