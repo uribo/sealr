@@ -30,7 +30,7 @@ put <- function(all = FALSE) {
 
   if (rlang::is_false(all)) {
     which_lines <-
-      which_lines[which_lines %in% (as.numeric(context$selection[[1]]$range$start[1]) - 1)]
+      max(which_lines[0 > (which_lines - (as.numeric(context$selection[[1]]$range$start[1])))])
   }
 
   x <-
