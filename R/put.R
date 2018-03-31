@@ -51,3 +51,8 @@ put <- function(all = FALSE) {
   purrr::walk(out_lines, ~ rstudioapi::insertText(c(..1, 1), "# ", id = context$id))
   # nocov end
 }
+
+#' @noRd
+put_all <- function() {
+  put(all = TRUE)
+}

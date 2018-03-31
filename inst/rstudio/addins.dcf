@@ -1,0 +1,4 @@
+Name: Mask to all seal
+Description: Comment out the lines of transcribe() and design_*() in the document
+Binding: put_all
+Interactive: false
