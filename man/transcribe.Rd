@@ -22,6 +22,8 @@ If you chose \emph{TRUE}, to make a detailed record for each variables in data f
   \item{clip}{If \emph{TRUE} will overwrite the system clipboard.
 When clipr is not available, The clip arguments is forcibly \emph{FALSE}.}
   \item{ts}{include comments that timestamp?}
+  \item{mask_seal}{Whether to comment out after executing the function.
+Default \emph{FALSE}. This option is effective only when using RStudio.}
 }}
 }
 \description{

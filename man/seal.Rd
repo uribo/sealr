@@ -5,7 +5,8 @@
 \alias{seal}
 \title{Sealing the test results}
 \usage{
-seal(test, load_testthat = FALSE, clip = TRUE, ts = TRUE)
+seal(test, load_testthat = FALSE, clip = TRUE, ts = TRUE,
+  mask_seal = FALSE)
 }
 \arguments{
 \item{test}{test}
@@ -16,6 +17,9 @@ seal(test, load_testthat = FALSE, clip = TRUE, ts = TRUE)
 When clipr is not available, The clip arguments is forcibly \emph{FALSE}.}
 
 \item{ts}{include comments that timestamp?}
+
+\item{mask_seal}{Whether to comment out after executing the function.
+Default \emph{FALSE}. This option is effective only when using RStudio.}
 }
 \description{
 Recording the state of the object

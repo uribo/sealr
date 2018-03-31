@@ -7,6 +7,8 @@
 #' @param clip If *TRUE* will overwrite the system clipboard.
 #' When clipr is not available, The clip arguments is forcibly *FALSE*.
 #' @param ts include comments that timestamp?
+#' @param mask_seal Whether to comment out after executing the function.
+#' Default *FALSE*. This option is effective only when using RStudio.
 #'
 #' @name seal
 #' @examples
@@ -21,7 +23,7 @@ NULL
 
 #' @rdname seal
 #' @export
-seal <- function(test, load_testthat = FALSE, clip = TRUE, ts = TRUE) {
+seal <- function(test, load_testthat = FALSE, clip = TRUE, ts = TRUE, mask_seal = FALSE) {
 
   test_char <- test
 
@@ -49,6 +51,10 @@ seal <- function(test, load_testthat = FALSE, clip = TRUE, ts = TRUE) {
                  sep = "\n") %>%
       styler::style_text()
   }
+
+  if (rlang::is_true(rstudioapi::isAvailable()))
+    if (rlang::is_true(mask_seal))
+      put(all = FALSE)
 
   return(res)
 }
