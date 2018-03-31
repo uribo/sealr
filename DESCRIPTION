@@ -15,11 +15,11 @@ Depends:
 Imports: 
     clipr (>= 0.4.0),
     clisymbols (>= 1.2.0),
-    digest,
+    digest (>= 0.6.15),
     dplyr (>= 0.7.4),
     glue (>= 1.2.0),
-    lobstr,
     magrittr (>= 1.5),
+    lobstr,
     purrr (>= 0.2.4),
     rlang (>= 0.2.0),
     rstudioapi (>= 0.7),
@@ -28,12 +28,15 @@ Imports:
     tidyr (>= 0.8.0)
 Suggests: 
     covr (>= 3.0.1),
-    testthat (>= 2.0.0)
+    testthat (>= 2.0.0),
+    knitr (>= 1.20),
+    rmarkdown (>= 1.9)
 Remotes:
-    r-lib/lobstr
+    r-lib/robstr
 ByteCompile: true
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
-Language: en-US
+VignetteBuilder: knitr
