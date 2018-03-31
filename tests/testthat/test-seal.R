@@ -6,6 +6,8 @@ test_that("sealing", {
   expect_silent(seal(tests, load_testthat = TRUE, clip = FALSE))
 
   skip_on_os("mac")
+  skip_on_os("windows")
+  skip_on_cran()
   skip_on_appveyor()
   expect_warning(
     seal(tests, clip = TRUE),
