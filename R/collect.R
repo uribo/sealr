@@ -14,7 +14,7 @@
 #' @name collect
 #' @examples
 #' \dontrun{
-#' Return objects in .GlobaEnv
+#' # Return objects in .GlobaEnv
 #' my_iris <- iris
 #' ls_objects()
 #' # Filter by object class

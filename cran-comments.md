@@ -11,3 +11,5 @@
 
 * This is a new release.
 * Re-submission, clear the test at win-builder and R-hub.
+* Added comment character to collect.Rd.
+* Remove example lines which unexported functions (compound).
