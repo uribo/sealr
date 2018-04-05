@@ -27,7 +27,7 @@ Imports:
     tidyr (>= 0.8.0)
 Suggests: 
     covr (>= 3.0.1),
-    testthat (>= 2.0.0)
+    testthat (>= 2.0.0),
     knitr (>= 1.20),
     rmarkdown (>= 1.9)
 ByteCompile: true
