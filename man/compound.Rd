@@ -12,12 +12,3 @@ compound(x)
 \description{
 Storage R object to a temporary environment
 }
-\examples{
-\dontrun{
-compound(letters)
-compound(iris)
-
-x <- c(1, 3, 5)
-x \%>\% compound()
-}
-}
