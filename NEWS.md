@@ -1,3 +1,5 @@
+# sealr 0.1.0.9000
+
 # sealr 0.1.0 (2018-03-31)
 
 * Version 0.1.0 is on CRAN.
