@@ -3,10 +3,16 @@
 sealr <img src="man/figures/logo.png" align="right" width="120px" />
 ====================================================================
 
-[![CRAN status](https://www.r-pkg.org/badges/version/sealr)](https://cran.r-project.org/package=sealr) [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/uribo/sealr.svg?branch=master)](https://travis-ci.org/uribo/sealr) [![Coverage status](https://codecov.io/gh/uribo/sealr/branch/master/graph/badge.svg)](https://codecov.io/github/uribo/sealr?branch=master)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/sealr)](https://cran.r-project.org/package=sealr) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/sealr?color=FF5254)](https://cran.r-project.org/package=sealr) [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-blue.svg)](https://cran.r-project.org/) [![Depsy](http://depsy.org/api/package/cran/sealr/badge.svg)](http://depsy.org/package/r/sealr)
+
+[![Travis build status](https://travis-ci.org/uribo/sealr.svg?branch=master)](https://travis-ci.org/uribo/sealr) [![Coverage status](https://codecov.io/gh/uribo/sealr/branch/master/graph/badge.svg)](https://codecov.io/github/uribo/sealr?branch=master)
+
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg?style=for-the-badge)](https://www.tidyverse.org/lifecycle/#experimental) [![npm](https://img.shields.io/npm/l/express.svg?style=for-the-badge)](https://github.com/uribo/sealr)
 
 Motivation
 ----------
+
+![](man/figures/sealr_introduction.png)
 
 Data is not always what you think. Someone may change a single value or the data type may be different depending on the specification the API. We need to be aware of these data changes as soon as possible (*It is hard to review from the final result!*).
 
@@ -17,7 +23,13 @@ The goal of **sealr** is to reduce the burden of writing unit tests and assertio
 Installation
 ------------
 
-**sealr** is not available on CRAN. So, install from GitHub.
+**sealr** is available on CRAN.
+
+``` r
+install.packages("sealr")
+```
+
+For developers, install from GitHub.
 
 ``` r
 install.packages("devtools")
@@ -41,14 +53,16 @@ library(testthat)
 x <- seq(1, 9, by = 2)
 
 design_class(x, seal = TRUE)
-#> #' ℹ: Labeling on 2018-04-01 by the sealr package (v0.0.0.9000)
+#> Warning: clipr not available. check clipr configuration.
+#> #' ℹ: Labeling on 2018-04-13 by the sealr package (v0.1.0.9000)
 #> expect_is(
 #>   x,
 #>   "numeric"
 #> )
 
 design_range(x, seal = TRUE)
-#> #' ℹ: Labeling on 2018-04-01 by the sealr package (v0.0.0.9000)
+#> Warning: clipr not available. check clipr configuration.
+#> #' ℹ: Labeling on 2018-04-13 by the sealr package (v0.1.0.9000)
 #> expect_equal(
 #>   range(x, na.rm = TRUE),
 #>   c(1, 9)
@@ -69,7 +83,7 @@ expect_is(
 
 ``` r
 transcribe(iris)
-#> #' ℹ: Labeling on 2018-04-01 by the sealr package (v0.0.0.9000)
+#> #' ℹ: Labeling on 2018-04-13 by the sealr package (v0.1.0.9000)
 #> test_that("check iris statement", {
 #>   expect_is(
 #>     iris,
