@@ -1,4 +1,4 @@
-FROM rocker/tidyverse:3.4.4
+FROM rocker/tidyverse:3.5.0
 RUN apt-get update
 
 RUN apt-get install -y \
