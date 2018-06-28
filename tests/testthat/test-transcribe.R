@@ -120,7 +120,7 @@ test_that("methods", {
       expect_equal(
         transcribe(band_members, seal = FALSE),
         # nolint start
-        "test_that(\"check band_members statement\", {expect_is(\nband_members,\nc(\"tbl_df\", \"tbl\", \"data.frame\")\n)\nexpect_equal(\ndim(band_members),\nc(3L, 2L)\n)\nexpect_named(\nband_members,\nc(\"name\", \"band\")\n)\nexpect_equal(\nband_members %>% purrr::map(class) %>% unname(),\nlist(\"character\", \"character\")\n)})"
+        "test_that(\"check band_members statement\", {expect_is(\nband_members,\nc(\"tbl_df\", \"tbl\", \"data.frame\")\n)\nexpect_equal(\ndim(band_members),\n3:2\n)\nexpect_named(\nband_members,\nc(\"name\", \"band\")\n)\nexpect_equal(\nband_members %>% purrr::map(class) %>% unname(),\nlist(\"character\", \"character\")\n)})"
         # nolint end
       )
     }
