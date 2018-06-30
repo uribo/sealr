@@ -1,6 +1,6 @@
 Package: sealr
 Title: Sealing the R Objects Test and Assert Conditions
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Authors@R: c(
     person(given = "Shinya", family = "Uryu", email = "suika1127@gmail.com", role  = c("aut", "cre"), comment = c(ORCID = "0000-0002-0493-6186"))
     )
@@ -19,7 +19,6 @@ Imports:
     dplyr (>= 0.7.4),
     glue (>= 1.2.0),
     magrittr (>= 1.5),
-    lobstr,
     purrr (>= 0.2.4),
     rlang (>= 0.2.0),
     rstudioapi (>= 0.7),
@@ -30,9 +29,8 @@ Suggests:
     covr (>= 3.0.1),
     testthat (>= 2.0.0),
     knitr (>= 1.20),
-    rmarkdown (>= 1.9)
-Remotes:
-    r-lib/lobstr
+    rmarkdown (>= 1.9),
+    withr (>= 2.1.2)
 ByteCompile: true
 Encoding: UTF-8
 Language: en-US
