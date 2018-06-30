@@ -1,22 +1,27 @@
 FROM rocker/tidyverse:3.5.0
-RUN apt-get update
 
-RUN apt-get install -y \
-  xclip xsel
+RUN set -x && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    qpdf \
+    xclip \
+    xsel && \
+  rm -rf /var/lib/apt/lists/*
 
-RUN install2.r \
-  clipr \
-  clisymbols \
-  glue \
-  rlang \
-  usethis \
-  withr
-
-RUN install2.r \
-  DT \
-  spelling
-
-RUN installGithub.r \
-  'r-lib/devtools' \
-  'tidyverse/reprex' \
-  'r-lib/lobstr'
+RUN set -x && \
+  install2.r --error \
+    clipr \
+    clisymbols \
+    glue \
+    rlang \
+    usethis \
+    withr && \
+  : "Internal use"&& \
+  install2.r --error \
+    DT \
+    spelling && \
+  installGithub.r \
+    'r-lib/devtools' \
+    'r-lib/revdepcheck' \
+    'tidyverse/reprex' \
+    'r-lib/lobstr'
