@@ -1,4 +1,7 @@
-# sealr 0.1.0.9000
+# sealr 0.1.1 (2018-06-30)
+
+* Folloing glue update.
+* Fixed CRAN test warning.
 
 # sealr 0.1.0 (2018-03-31)
 
